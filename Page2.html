@@ -3,20 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Falling Leaves</title>
+    <title>Love Quest with Falling Leaves</title>
     <style>
+        /* Fall-themed background color */
         body {
-            background-color: #f9f1e3; /* Fall-themed background color */
-            font-family: 'Signika Negative', Asap, sans-serif;
+            font-family: Arial, sans-serif;
+            background-color: #f9f1e3;
             color: #4e3b31;
+            text-align: center;
+            padding: 20px;
             overflow: hidden;
         }
 
+        h1 {
+            color: #b65c39;
+        }
+
+        button {
+            background-color: #b65c39;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #a55b34;
+        }
+
+        #no-button {
+            position: relative;
+        }
+
+        /* Falling leaves */
         .dot {
             width: 35px;
             height: 35px;
             position: absolute;
-            background: url(http://www.clipartqueen.com/image-files/red-lobed-fall-clipart-leaf.png);
+            background: url('http://www.clipartqueen.com/image-files/red-lobed-fall-clipart-leaf.png');
             background-size: 100% 100%;
             animation: fall linear infinite;
         }
@@ -25,14 +53,6 @@
             width: 100%;
             height: 100%;
             position: relative;
-        }
-
-        #logo {
-            left: 50%;
-            top: 50%;
-            position: absolute;
-            border-radius: 10px;
-            transform: translate(-50%, -50%);
         }
 
         @keyframes fall {
@@ -46,12 +66,41 @@
     </style>
 </head>
 <body>
+
     <div id="container">
-        <img id="logo" src="http://gravatar.com/avatar/5a224f121f96bd037bf6c1c1e2b686fb?s=256" alt="Logo" height="120" width="120">
+        <div id="opening-screen">
+            <h1>Do you love me?</h1>
+            <button id="yes-button" onclick="startQuiz()">Yes</button>
+            <button id="no-button" onmouseover="moveNoButton()">No</button>
+            <h4>There's only one right answer.</h4>
+        </div>
     </div>
 
     <script>
-        // JavaScript to create falling leaves
+        // Moving "No" button functionality
+        function startQuiz() {
+            window.location.href = 'Wordsearch.html';
+        }
+
+        function moveNoButton() {
+            const noButton = document.getElementById('no-button');
+            const randomX = (Math.random() * 600) - 300;
+            const randomY = (Math.random() * 600) - 300;
+            const randomRotation = (Math.random() * 360);
+            noButton.style.transform = `translate(${randomX}px, ${randomY}px) rotate(${randomRotation}deg)`;
+            noButton.style.backgroundColor = getRandomColor();
+        }
+
+        function getRandomColor() {
+            const letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+        // Falling leaves functionality
         var totalLeaves = 30;
         var container = document.getElementById("container");
         var w = window.innerWidth;
@@ -67,5 +116,6 @@
             container.appendChild(leaf);
         }
     </script>
+
 </body>
 </html>
