@@ -3,32 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Love Quest with Falling Leaves</title>
+    <title>Love Quest</title>
+    <link rel="stylesheet" href="styles.css">
     <style>
-        /* Fall-themed background color */
         body {
             font-family: Arial, sans-serif;
             background-color: #f9f1e3;
             color: #4e3b31;
             text-align: center;
-            padding: 20px;
-            overflow: hidden;
-            height: 100vh; /* Ensure full viewport height */
-            margin: 0; /* Remove default margin */
-        }
-
-        #opening-screen {
-            display: flex; /* Use Flexbox to center items */
-            flex-direction: column; /* Stack items vertically */
+            height: 100vh; /* Full height of the viewport */
+            display: flex; /* Use flexbox for alignment */
+            flex-direction: column; /* Align items vertically */
             justify-content: center; /* Center vertically */
             align-items: center; /* Center horizontally */
-            height: 100%; /* Full height of the viewport */
+            overflow: hidden;
         }
-
         h1 {
             color: #b65c39;
+            margin-bottom: 20px; /* Spacing between title and buttons */
         }
-
         button {
             background-color: #b65c39;
             color: white;
@@ -40,92 +33,60 @@
             margin: 10px;
             transition: background-color 0.3s ease;
         }
-
         button:hover {
             background-color: #a55b34;
         }
-
         #no-button {
             position: relative;
         }
-
-        /* Falling leaves */
+        #logo {
+            margin-bottom: 20px; /* Spacing for logo if needed */
+        }
         .dot {
             width: 35px;
             height: 35px;
             position: absolute;
-            background: url('http://www.clipartqueen.com/image-files/red-lobed-fall-clipart-leaf.png');
+            background: url(http://www.clipartqueen.com/image-files/red-lobed-fall-clipart-leaf.png);
             background-size: 100% 100%;
-            animation: fall linear infinite;
-        }
-
-        #container {
-            width: 100%;
-            height: 100%;
-            position: relative;
-        }
-
-        @keyframes fall {
-            0% {
-                transform: translateY(-100px) rotate(0deg);
-            }
-            100% {
-                transform: translateY(110vh) rotate(360deg);
-            }
         }
     </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+    <script>
+        var falling = true;
+        var total = 30;
+        var container = document.getElementById("container"), w = window.innerWidth, h = window.innerHeight;
+
+        // Create leaves
+        for (i = 0; i < total; i++) { 
+            var Div = document.createElement('div');
+            TweenLite.set(Div, {attr: {class: 'dot'}, x: R(0, w), y: R(-200, -150), z: R(-200, 200)});
+            container.appendChild(Div);
+            animm(Div);
+        }
+
+        // Animate leaves
+        function animm(elm) {   
+            TweenMax.to(elm, R(6, 15), {y: h + 100, ease: Linear.easeNone, repeat: -1, delay: -15});
+            TweenMax.to(elm, R(4, 8), {x: '+=100', rotationZ: R(0, 180), repeat: -1, yoyo: true, ease: Sine.easeInOut});
+            TweenMax.to(elm, R(2, 8), {rotationX: R(0, 360), rotationY: R(0, 360), repeat: -1, yoyo: true, ease: Sine.easeInOut, delay: -5});
+        };
+
+        function R(min, max) { return min + Math.random() * (max - min) };
+
+        // Resize leaves on window resize
+        window.onresize = function() {
+            w = window.innerWidth;
+            h = window.innerHeight;
+        };
+    </script>
 </head>
 <body>
-
     <div id="container">
-        <div id="opening-screen">
-            <h1>Do you love me?</h1>
-            <button id="yes-button" onclick="startQuiz()">Yes</button>
-            <button id="no-button" onmouseover="moveNoButton()">No</button>
-            <h4>There's only one right answer.</h4>
-        </div>
+        <img id="logo" src="http://gravatar.com/avatar/5a224f121f96bd037bf6c1c1e2b686fb?s=256" alt="Smiley face" height="120" width="120">
+        <h1>Do you love me?</h1>
+        <button id="yes-button" onclick="startQuiz()">Yes</button>
+        <button id="no-button" onmouseover="moveNoButton()">No</button>
+        <h4>There's only one right answer.</h4>
     </div>
-
-    <script>
-        // Moving "No" button functionality
-        function startQuiz() {
-            window.location.href = 'Wordsearch.html';
-        }
-
-        function moveNoButton() {
-            const noButton = document.getElementById('no-button');
-            const randomX = (Math.random() * 600) - 300;
-            const randomY = (Math.random() * 600) - 300;
-            const randomRotation = (Math.random() * 360);
-            noButton.style.transform = `translate(${randomX}px, ${randomY}px) rotate(${randomRotation}deg)`;
-            noButton.style.backgroundColor = getRandomColor();
-        }
-
-        function getRandomColor() {
-            const letters = '0123456789ABCDEF';
-            let color = '#';
-            for (let i = 0; i < 6; i++) {
-                color += letters[Math.floor(Math.random() * 16)];
-            }
-            return color;
-        }
-
-        // Falling leaves functionality
-        var totalLeaves = 30;
-        var container = document.getElementById("container");
-        var w = window.innerWidth;
-        var h = window.innerHeight;
-
-        for (var i = 0; i < totalLeaves; i++) {
-            var leaf = document.createElement('div');
-            leaf.classList.add('dot');
-            leaf.style.left = Math.random() * w + 'px'; // Random horizontal position
-            leaf.style.animationDuration = (6 + Math.random() * 10) + 's'; // Random speed
-            leaf.style.animationDelay = (-Math.random() * 10) + 's'; // Random start delay
-            leaf.style.transform = 'rotate(' + (Math.random() * 360) + 'deg)'; // Random initial rotation
-            container.appendChild(leaf);
-        }
-    </script>
-
 </body>
 </html>
