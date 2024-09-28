@@ -29,6 +29,7 @@
 
         #no-button {
             position: relative;
+            transition: transform 0.3s ease; /* Smooth movement */
         }
     </style>
     <script>
@@ -39,8 +40,9 @@
 
         function moveNoButton() {
             const noButton = document.getElementById('no-button');
-            const randomX = Math.floor(Math.random() * 300) - 150; // Random horizontal position
-            const randomY = Math.floor(Math.random() * 300) - 150; // Random vertical position
+            // Get random values to move the button more significantly
+            const randomX = (Math.random() * 400) - 200; // Move horizontally between -200px and +200px
+            const randomY = (Math.random() * 400) - 200; // Move vertically between -200px and +200px
             noButton.style.transform = `translate(${randomX}px, ${randomY}px)`; // Move button
         }
     </script>
