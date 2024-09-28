@@ -102,3 +102,7 @@ input[type="password"] {
     color: #e67e22; /* Orange for the hint text */
     font-weight: bold; /* Bold for emphasis */
 }
+.gif-small {
+    max-width: 300px; /* Adjust as needed */
+    margin: 20px auto; /* Center the GIF */
+}
