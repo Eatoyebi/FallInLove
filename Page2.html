@@ -8,76 +8,95 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f9f1e3;
-            color: #4e3b31;
-            text-align: center;
-            height: 100vh; /* Full height of the viewport */
+            background-color: #f9f1e3; /* Background color */
+            color: #4e3b31; /* Text color */
+            text-align: center; /* Center text */
+            height: 100vh; /* Full height of viewport */
             display: flex; /* Use flexbox for alignment */
             flex-direction: column; /* Align items vertically */
             justify-content: center; /* Center vertically */
             align-items: center; /* Center horizontally */
-            overflow: hidden;
+            overflow: hidden; /* Hide overflow */
         }
         h1 {
-            color: #b65c39;
+            color: #b65c39; /* Title color */
             margin-bottom: 20px; /* Spacing between title and buttons */
         }
         button {
-            background-color: #b65c39;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            margin: 10px;
-            transition: background-color 0.3s ease;
+            background-color: #b65c39; /* Button background color */
+            color: white; /* Button text color */
+            border: none; /* No border */
+            border-radius: 5px; /* Rounded corners */
+            padding: 10px 20px; /* Button padding */
+            font-size: 16px; /* Button text size */
+            cursor: pointer; /* Pointer on hover */
+            margin: 10px; /* Button margin */
+            transition: background-color 0.3s ease; /* Transition effect */
         }
         button:hover {
-            background-color: #a55b34;
+            background-color: #a55b34; /* Button hover color */
         }
         #no-button {
-            position: relative;
+            position: relative; /* Relative position for movement */
         }
         #logo {
             margin-bottom: 20px; /* Spacing for logo if needed */
         }
         .dot {
-            width: 35px;
-            height: 35px;
-            position: absolute;
-            background: url(http://www.clipartqueen.com/image-files/red-lobed-fall-clipart-leaf.png);
-            background-size: 100% 100%;
+            width: 35px; /* Leaf width */
+            height: 35px; /* Leaf height */
+            position: absolute; /* Absolute positioning */
+            background: url(http://www.clipartqueen.com/image-files/red-lobed-fall-clipart-leaf.png); /* Leaf image */
+            background-size: 100% 100%; /* Leaf image size */
         }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
     <script>
-        var falling = true;
-        var total = 30;
-        var container = document.getElementById("container"), w = window.innerWidth, h = window.innerHeight;
+        var total = 30; // Total number of leaves
+        var container = document.getElementById("container"), 
+            w = window.innerWidth, 
+            h = window.innerHeight;
 
         // Create leaves
-        for (i = 0; i < total; i++) { 
+        for (var i = 0; i < total; i++) { 
             var Div = document.createElement('div');
-            TweenLite.set(Div, {attr: {class: 'dot'}, x: R(0, w), y: R(-200, -150), z: R(-200, 200)});
+            Div.classList.add('dot');
+            TweenLite.set(Div, { x: R(0, w), y: R(-200, -150) });
             container.appendChild(Div);
-            animm(Div);
+            animateLeaf(Div);
         }
 
         // Animate leaves
-        function animm(elm) {   
-            TweenMax.to(elm, R(6, 15), {y: h + 100, ease: Linear.easeNone, repeat: -1, delay: -15});
-            TweenMax.to(elm, R(4, 8), {x: '+=100', rotationZ: R(0, 180), repeat: -1, yoyo: true, ease: Sine.easeInOut});
-            TweenMax.to(elm, R(2, 8), {rotationX: R(0, 360), rotationY: R(0, 360), repeat: -1, yoyo: true, ease: Sine.easeInOut, delay: -5});
-        };
+        function animateLeaf(elm) {   
+            TweenMax.to(elm, R(6, 15), { y: h + 100, ease: Linear.easeNone, repeat: -1 });
+            TweenMax.to(elm, R(4, 8), { x: '+=100', rotationZ: R(0, 180), repeat: -1, yoyo: true, ease: Sine.easeInOut });
+            TweenMax.to(elm, R(2, 8), { rotationX: R(0, 360), rotationY: R(0, 360), repeat: -1, yoyo: true, ease: Sine.easeInOut });
+        }
 
+        // Random number generator
         function R(min, max) { return min + Math.random() * (max - min) };
 
-        // Resize leaves on window resize
-        window.onresize = function() {
-            w = window.innerWidth;
-            h = window.innerHeight;
-        };
+        // Move the "No" button randomly
+        function moveNoButton() {
+            const noButton = document.getElementById('no-button');
+            const randomX = (Math.random() * (window.innerWidth - 150)) - 75; // Adjust for button width
+            const randomY = (Math.random() * (window.innerHeight - 150)) - 75; // Adjust for button height
+            noButton.style.transform = `translate(${randomX}px, ${randomY}px)`;
+            noButton.style.backgroundColor = getRandomColor();
+        }
+
+        function getRandomColor() {
+            const letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+        function startQuiz() {
+            window.location.href = 'Wordsearch.html'; // Redirect to quiz page
+        }
     </script>
 </head>
 <body>
