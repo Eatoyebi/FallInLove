@@ -12,7 +12,7 @@
             color: #4e3b31;
             text-align: center;
             padding: 20px;
-            overflow: hidden;
+            overflow: hidden; /* Hide overflow */
             position: relative; /* Needed for absolute positioning of leaves */
         }
 
@@ -29,12 +29,13 @@
             cursor: pointer;
             margin: 10px;
             transition: background-color 0.3s ease;
+            position: relative; /* Allow positioning within its context */
         }
         button:hover {
             background-color: #a55b34;
         }
         #no-button {
-            position: relative;
+            position: absolute; /* Absolute positioning for movement */
         }
 
         /* Falling leaves */
@@ -78,11 +79,12 @@
             const containerRect = container.getBoundingClientRect();
             const buttonRect = noButton.getBoundingClientRect();
 
-            // Ensure "No" button stays within the visible area
+            // Calculate maximum positions for movement
             const maxX = containerRect.width - buttonRect.width;
-            const maxY = containerRect.height - buttonRect.height - buttonRect.top; // Prevent going above question
+            const maxY = containerRect.height - buttonRect.height - 100; // Ensure it stays below the question
 
-            const randomX = Math.random() * maxX; // Random X position within container
+            // Generate random positions within the limits
+            const randomX = Math.random() * maxX; // Random X position
             const randomY = Math.random() * maxY; // Random Y position
 
             noButton.style.transform = `translate(${randomX}px, ${randomY}px)`;
