@@ -1,27 +1,89 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f8ff;
-    text-align: center;
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9; /* Light background for a soft look */
+    color: #333; /* Dark text for contrast */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
 }
 
-.opening-screen {
-    text-align: center;
+h1 {
+    color: #e74c3c; /* Bright red for emphasis */
 }
 
-#yes-button, #no-button {
-    margin: 10px;
+.button {
     padding: 10px 20px;
+    font-size: 16px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    margin: 10px;
+    transition: background-color 0.3s, transform 0.3s;
 }
 
-#yes-button {
-    background-color: #28a745;
+.button-yes {
+    background-color: #2ecc71; /* Green for 'Yes' */
     color: white;
 }
 
-#no-button {
-    background-color: #dc3545;
+.button-no {
+    background-color: #e74c3c; /* Red for 'No' */
     color: white;
+}
+
+.button:hover {
+    transform: scale(1.05); /* Slightly increase size on hover */
+}
+
+.word-search {
+    display: grid;
+    grid-template-columns: repeat(15, 30px); /* 15 columns for the word search */
+    gap: 2px; /* Space between cells */
+    margin: 20px auto;
+}
+
+.grid-cell {
+    width: 30px; /* Cell width */
+    height: 30px; /* Cell height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ecf0f1; /* Light gray for cells */
+    border: 1px solid #bdc3c7; /* Gray border for cells */
+    font-size: 18px; /* Larger font size for visibility */
+    font-weight: bold; /* Make letters bold */
+    transition: background-color 0.3s; /* Smooth background color change */
+}
+
+.grid-cell:hover {
+    background-color: #3498db; /* Highlight cell on hover */
+    color: white; /* Change text color to white */
+}
+
+.grid-row {
+    display: flex; /* Use flexbox for rows */
+}
+
+#word-list {
+    margin-top: 20px;
+    list-style-type: none; /* Remove bullets from list */
+    padding: 0; /* Remove default padding */
+}
+
+#word-list li {
+    margin: 5px 0; /* Space between list items */
+}
+
+#result {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #2ecc71; /* Green for the result text */
+}
+
+.hidden {
+    display: none; /* Hide the result initially */
 }

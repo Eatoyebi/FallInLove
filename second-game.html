@@ -1,0 +1,107 @@
+const words = ["LIMMY", "LOVE", "NIGERIA", "LIZARD", "MONKEYMAN", "FIREANDICE", "HUG", "VIAVITE", "CINCINNATI"];
+const gridSize = 15; // Increased grid size for longer words
+let grid = [];
+let foundWords = [];
+
+// Function to generate the word search grid
+function generateGrid() {
+    grid = Array.from({ length: gridSize }, () => Array(gridSize).fill(''));
+
+    words.forEach(word => {
+        placeWord(word);
+    });
+
+    fillEmptySpaces();
+    displayGrid();
+}
+
+// Function to place a word in the grid
+function placeWord(word) {
+    let placed = false;
+
+    while (!placed) {
+        const direction = Math.floor(Math.random() * 2); // 0 = horizontal, 1 = vertical
+        const startX = Math.floor(Math.random() * gridSize);
+        const startY = Math.floor(Math.random() * gridSize);
+
+        if (canPlaceWord(word, startX, startY, direction)) {
+            for (let i = 0; i < word.length; i++) {
+                if (direction === 0) {
+                    grid[startY][startX + i] = word[i];
+                } else {
+                    grid[startY + i][startX] = word[i];
+                }
+            }
+            placed = true;
+        }
+    }
+}
+
+// Function to check if a word can be placed
+function canPlaceWord(word, startX, startY, direction) {
+    if (direction === 0) { // Horizontal
+        if (startX + word.length > gridSize) return false;
+        for (let i = 0; i < word.length; i++) {
+            if (grid[startY][startX + i] !== '') return false;
+        }
+    } else { // Vertical
+        if (startY + word.length > gridSize) return false;
+        for (let i = 0; i < word.length; i++) {
+            if (grid[startY + i][startX] !== '') return false;
+        }
+    }
+    return true;
+}
+
+// Function to fill empty spaces with random letters
+function fillEmptySpaces() {
+    for (let i = 0; i < gridSize; i++) {
+        for (let j = 0; j < gridSize; j++) {
+            if (grid[i][j] === '') {
+                grid[i][j] = String.fromCharCode(Math.floor(Math.random() * 26) + 65);
+            }
+        }
+    }
+}
+
+// Function to display the grid in the HTML
+function displayGrid() {
+    const wordSearchDiv = document.getElementById('word-search');
+    wordSearchDiv.innerHTML = '';
+
+    grid.forEach(row => {
+        const rowDiv = document.createElement('div');
+        rowDiv.classList.add('grid-row');
+        row.forEach(cell => {
+            const cellDiv = document.createElement('span');
+            cellDiv.classList.add('grid-cell');
+            cellDiv.textContent = cell;
+            rowDiv.appendChild(cellDiv);
+        });
+        wordSearchDiv.appendChild(rowDiv);
+    });
+
+    displayWordList();
+}
+
+// Function to display the word list
+function displayWordList() {
+    const wordListDiv = document.getElementById('word-list');
+    wordListDiv.innerHTML = '';
+
+    words.forEach(word => {
+        const listItem = document.createElement('li');
+        listItem.textContent = word;
+        wordListDiv.appendChild(listItem);
+    });
+}
+
+// Function to check the answers
+function checkAnswers() {
+    const resultDiv = document.getElementById('result');
+    resultDiv.classList.remove('hidden');
+    resultDiv.textContent = "You found: " + foundWords.join(", ") || "No words found.";
+}
+
+// Start the game when the page loads
+window.onload = generateGrid;
