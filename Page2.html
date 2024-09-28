@@ -3,41 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Love Quest with Falling Leaves</title>
+    <title>The answer is YES!</title>
     <style>
         /* Fall-themed background color */
-        html, body {
-            height: 100%; /* Set height to fill the viewport */
-            margin: 0; /* Remove default margin */
-        }
-        
         body {
             font-family: Arial, sans-serif;
             background-color: #f9f1e3;
             color: #4e3b31;
             text-align: center;
             padding: 20px;
-            overflow: hidden;
-        }
-    
-        #container {
-            display: flex; /* Use Flexbox */
-            justify-content: center; /* Center horizontally */
-            align-items: center; /* Center vertically */
-            flex-direction: column; /* Stack items vertically */
-            height: 100%; /* Fill the full height */
+            overflow: hidden; /* Hide overflow */
+            position: relative; /* Needed for absolute positioning of leaves */
+            height: 100vh; /* Full viewport height for centering */
+            display: flex; /* Use flexbox for centering */
+            flex-direction: column; /* Stack elements vertically */
+            justify-content: center; /* Center vertically */
+            align-items: center; /* Center horizontally */
         }
 
-        #button-container {
-            display: flex; /* Use Flexbox for buttons */
-            justify-content: center; /* Center buttons horizontally */
-            gap: 10px; /* Space between buttons */
-        }
-    
         h1 {
             color: #b65c39;
+            margin-bottom: 20px; /* Space between the question and buttons */
         }
-        
         button {
             background-color: #b65c39;
             color: white;
@@ -48,16 +35,15 @@
             cursor: pointer;
             margin: 10px;
             transition: background-color 0.3s ease;
+            position: relative; /* Allow positioning within its context */
         }
-        
         button:hover {
             background-color: #a55b34;
         }
-        
         #no-button {
-            position: relative;
+            position: absolute; /* Absolute positioning for movement */
         }
-    
+
         /* Falling leaves */
         .dot {
             width: 35px;
@@ -67,22 +53,23 @@
             background-size: 100% 100%;
             animation: fall linear infinite;
         }
-    
+
         @keyframes fall {
             0% {
                 transform: translateY(-100px) rotate(0deg);
             }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+            }
         }
-    </style>    
+    </style>
 </head>
 <body>
     <div id="container">
         <div id="opening-screen">
             <h1>Do you love me?</h1>
-            <div id="button-container">
-                <button id="yes-button" onclick="startQuiz()">Yes</button>
-                <button id="no-button" onmouseover="moveNoButton()">No</button>
-            </div>
+            <button id="yes-button" onclick="startQuiz()">Yes</button>
+            <button id="no-button" onmouseover="moveNoButton()">No</button>
             <h4>There's only one right answer.</h4>
         </div>
     </div>
