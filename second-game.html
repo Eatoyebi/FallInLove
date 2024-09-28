@@ -12,8 +12,9 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-            background-color: #f8f9fa;
+            background-color: #ffefdb; /* Light fall background */
             font-family: Arial, sans-serif;
+            color: #5b3d00; /* Dark brown text color */
         }
 
         h1 {
@@ -33,9 +34,10 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: #e2e3e5;
-            border: 1px solid #ced4da;
+            background-color: #e2b052; /* Fall-themed cell color */
+            border: 1px solid #c49a3d; /* Border color */
             font-weight: bold;
+            font-size: 1.2em;
         }
 
         .found {
@@ -46,10 +48,26 @@
         .word-list {
             list-style-type: none;
             padding: 0;
+            margin: 20px 0;
         }
 
         .word-list li {
             margin: 5px 0;
+            font-size: 1.1em;
+        }
+
+        .button {
+            padding: 10px 20px;
+            background-color: #c49a3d; /* Button color */
+            border: none;
+            color: white;
+            font-size: 1em;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .button:hover {
+            background-color: #28a745; /* Hover effect */
         }
     </style>
 </head>
@@ -61,10 +79,10 @@
         <li>LOVE</li>
         <li>NIGERIA</li>
         <li>LIZARD</li>
-        <li>MONKEY MAN</li>
-        <li>FIRE AND ICE</li>
+        <li>MONKEYMAN</li>
+        <li>FIREANDICE</li>
         <li>HUG</li>
-        <li>VIA VITE</li>
+        <li>VIAVITE</li>
         <li>CINCINNATI</li>
     </ul>
     <button class="button" onclick="checkWords()">Check Answers</button>
@@ -126,10 +144,12 @@
 
         function checkWords() {
             const cells = document.querySelectorAll('.cell');
-            cells.forEach(cell => {
-                if (words.includes(cell.textContent)) {
-                    cell.classList.add('found');
-                }
+            words.forEach(word => {
+                cells.forEach(cell => {
+                    if (cell.textContent === word) {
+                        cell.classList.add('found');
+                    }
+                });
             });
             alert('Check the grid to see which words you found!');
         }
