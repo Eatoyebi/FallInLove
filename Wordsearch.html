@@ -12,9 +12,9 @@
             align-items: center;
             justify-content: flex-start;
             min-height: 100vh;
-            background-color: #ffefdb; /* Light fall background */
+            background-color: #ffefdb;
             font-family: Arial, sans-serif;
-            color: #5b3d00; /* Dark brown text color */
+            color: #5b3d00;
             padding: 20px;
             box-sizing: border-box;
         }
@@ -29,18 +29,18 @@
             flex-direction: column;
             align-items: center;
             width: 100%;
-            max-width: 800px; /* Set max width for better layout */
+            max-width: 800px;
         }
 
         .word-search {
             display: grid;
-            grid-template-columns: repeat(15, 35px); /* Adjusted the number of columns */
+            grid-template-columns: repeat(15, 35px);
             grid-gap: 2px;
             margin: 20px 0;
-            max-width: 100%; /* Allow full width */
-            background-color: #fff; /* Background for word search */
-            padding: 10px; /* Padding around the grid */
-            border: 1px solid #c49a3d; /* Border for word search */
+            max-width: 100%;
+            background-color: #fff;
+            padding: 10px;
+            border: 1px solid #c49a3d;
         }
 
         .cell {
@@ -49,8 +49,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: #e2b052; /* Fall-themed cell color */
-            border: 1px solid #c49a3d; /* Border color */
+            background-color: #e2b052;
+            border: 1px solid #c49a3d;
             font-weight: bold;
             font-size: 1.1em;
             cursor: pointer;
@@ -58,16 +58,16 @@
         }
 
         .cell:hover {
-            background-color: #ffd700; /* Highlight on hover */
+            background-color: #ffd700;
         }
 
         .selected {
-            background-color: #5b3d00; /* Highlight selected cells */
+            background-color: #5b3d00;
             color: white;
         }
 
         .found {
-            background-color: #28a745; /* Color for found words */
+            background-color: #28a745;
             color: white;
         }
 
@@ -77,13 +77,13 @@
             border: 1px solid #c49a3d;
             background-color: #fdf2e9;
             border-radius: 8px;
-            width: 100%; /* Full width for word list */
-            max-width: 400px; /* Limit max width */
+            width: 100%;
+            max-width: 400px;
         }
 
         .word-list {
             display: grid;
-            grid-template-columns: repeat(3, 1fr); /* Align words in 3x3 grid */
+            grid-template-columns: repeat(3, 1fr);
             grid-gap: 10px;
             list-style-type: none;
             padding: 0;
@@ -98,10 +98,9 @@
 
         .found-word {
             text-decoration: line-through;
-            color: #28a745; /* Green to indicate a found word */
+            color: #28a745;
         }
 
-        /* For smaller screens, reduce the size */
         @media (max-width: 600px) {
             .cell {
                 width: 30px;
@@ -121,6 +120,7 @@
 </head>
 <body>
     <div class="container">
+        <h1>Love Quest - Word Search</h1>
         <div class="word-list-container">
             <ul id="wordList" class="word-list">
                 <li id="word-LIMMY">LIMMY</li>
@@ -140,12 +140,11 @@
     
     <script>
         const words = ['LIMMY', 'LOVE', 'NIGERIA', 'LIZARD', 'MONKEYMAN', 'FIREANDICE', 'HUG', 'VIAVITE', 'CINCINNATI', 'SANDZ'];
-        const gridSize = 15; // Increased grid size for difficulty
+        const gridSize = 15;
         const grid = [];
         let selectedCells = [];
         let foundWords = [];
 
-        // Initialize the grid with empty strings
         for (let i = 0; i < gridSize; i++) {
             grid[i] = new Array(gridSize).fill('');
         }
@@ -161,25 +160,25 @@
         function placeWord(word) {
             let placed = false;
             while (!placed) {
-                const direction = Math.floor(Math.random() * 3); // 0: horizontal, 1: vertical, 2: diagonal
+                const direction = Math.floor(Math.random() * 3);
                 const row = Math.floor(Math.random() * gridSize);
                 const col = Math.floor(Math.random() * gridSize);
 
-                if (direction === 0 && col + word.length <= gridSize) { // Horizontal
+                if (direction === 0 && col + word.length <= gridSize) {
                     if (grid[row].slice(col, col + word.length).every(cell => cell === '')) {
                         for (let i = 0; i < word.length; i++) {
                             grid[row][col + i] = word[i];
                         }
                         placed = true;
                     }
-                } else if (direction === 1 && row + word.length <= gridSize) { // Vertical
+                } else if (direction === 1 && row + word.length <= gridSize) {
                     if (grid.slice(row, row + word.length).every(row => row[col] === '')) {
                         for (let i = 0; i < word.length; i++) {
                             grid[row + i][col] = word[i];
                         }
                         placed = true;
                     }
-                } else if (direction === 2 && row + word.length <= gridSize && col + word.length <= gridSize) { // Diagonal
+                } else if (direction === 2 && row + word.length <= gridSize && col + word.length <= gridSize) {
                     let validPlacement = true;
                     for (let i = 0; i < word.length; i++) {
                         if (grid[row + i][col + i] !== '') {
@@ -201,7 +200,7 @@
             for (let i = 0; i < gridSize; i++) {
                 for (let j = 0; j < gridSize; j++) {
                     if (grid[i][j] === '') {
-                        grid[i][j] = String.fromCharCode(65 + Math.floor(Math.random() * 26)); // Fill with random letters
+                        grid[i][j] = String.fromCharCode(65 + Math.floor(Math.random() * 26));
                     }
                 }
             }
@@ -226,35 +225,35 @@
         function toggleCell(cell, row, col) {
             const cellIndex = selectedCells.findIndex(c => c.row === row && c.col === col);
             if (cellIndex > -1) {
-                // Cell already selected, deselect it
                 cell.classList.remove('selected');
                 selectedCells.splice(cellIndex, 1);
             } else {
-                // Select the cell
                 cell.classList.add('selected');
-                selectedCells.push({ row, col, letter: grid[row][col] });
+                selectedCells.push({ row, col });
             }
-            
             checkWord();
         }
 
         function checkWord() {
-            const selectedLetters = selectedCells.map(c => c.letter).join('');
-            if (words.includes(selectedLetters)) {
+            const selectedLetters = selectedCells.map(cell => grid[cell.row][cell.col]).join('');
+            const foundIndex = words.findIndex(word => word === selectedLetters);
+            if (foundIndex !== -1 && !foundWords.includes(selectedLetters)) {
                 foundWords.push(selectedLetters);
-                markAsFound(selectedLetters);
-                selectedCells.forEach(c => {
-                    const cell = document.querySelector(`.cell[data-row="${c.row}"][data-col="${c.col}"]`);
-                    cell.classList.add('found');
+                selectedCells.forEach(cell => {
+                    const cellDiv = document.querySelector(`.cell[data-row="${cell.row}"][data-col="${cell.col}"]`);
+                    cellDiv.classList.add('found');
                 });
-                selectedCells = []; // Reset selection
+                document.getElementById(`word-${selectedLetters}`).classList.add('found-word');
+                checkAllWordsFound();
             }
         }
 
-        function markAsFound(word) {
-            const wordElement = document.getElementById(`word-${word}`);
-            if (wordElement) {
-                wordElement.classList.add('found-word');
+        function checkAllWordsFound() {
+            if (foundWords.length === words.length) {
+                const nextGameButton = document.createElement('button');
+                nextGameButton.textContent = 'Next Game';
+                nextGameButton.onclick = () => window.location.href = 'next_game.html';
+                document.body.appendChild(nextGameButton);
             }
         }
 
