@@ -119,7 +119,25 @@
         }
     </style>
 </head>
-<body>  
+<body>
+    <div class="container">
+        <div class="word-list-container">
+            <ul id="wordList" class="word-list">
+                <li id="word-LIMMY">LIMMY</li>
+                <li id="word-LOVE">LOVE</li>
+                <li id="word-NIGERIA">NIGERIA</li>
+                <li id="word-LIZARD">LIZARD</li>
+                <li id="word-MONKEYMAN">MONKEY MAN</li>
+                <li id="word-FIREANDICE">FIRE AND ICE</li>
+                <li id="word-HUG">HUG</li>
+                <li id="word-VIAVITE">VIA VITE</li>
+                <li id="word-CINCINNATI">CINCINNATI</li>
+                <li id="word-SANDZ">SANDZ</li>
+            </ul>
+        </div>
+        <div id="wordSearch" class="word-search"></div>
+    </div>
+    
     <script>
         const words = ['LIMMY', 'LOVE', 'NIGERIA', 'LIZARD', 'MONKEYMAN', 'FIREANDICE', 'HUG', 'VIAVITE', 'CINCINNATI', 'SANDZ'];
         const gridSize = 15; // Increased grid size for difficulty
@@ -250,23 +268,5 @@
 
         generateWordSearch(); // Initialize the word search when the page loads
     </script>
-
-<div class="container">
-    <div class="word-list-container">
-        <ul id="wordList" class="word-list">
-            <li id="word-LIMMY">LIMMY</li>
-            <li id="word-LOVE">LOVE</li>
-            <li id="word-NIGERIA">NIGERIA</li>
-            <li id="word-LIZARD">LIZARD</li>
-            <li id="word-MONKEYMAN">MONKEY MAN</li>
-            <li id="word-FIREANDICE">FIRE AND ICE</li>
-            <li id="word-HUG">HUG</li>
-            <li id="word-VIAVITE">VIA VITE</li>
-            <li id="word-CINCINNATI">CINCINNATI</li>
-            <li id="word-SANDZ">SANDZ</li>
-        </ul>
-    </div>
-    <div id="wordSearch" class="word-search"></div>
-</div>
 </body>
 </html>
