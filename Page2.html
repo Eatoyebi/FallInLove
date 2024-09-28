@@ -27,6 +27,12 @@
             flex-direction: column; /* Stack items vertically */
             height: 100%; /* Fill the full height */
         }
+
+        #button-container {
+            display: flex; /* Use Flexbox for buttons */
+            justify-content: center; /* Center buttons horizontally */
+            gap: 10px; /* Space between buttons */
+        }
     
         h1 {
             color: #b65c39;
@@ -73,8 +79,10 @@
     <div id="container">
         <div id="opening-screen">
             <h1>Do you love me?</h1>
-            <button id="yes-button" onclick="startQuiz()">Yes</button>
-            <button id="no-button" onmouseover="moveNoButton()">No</button>
+            <div id="button-container">
+                <button id="yes-button" onclick="startQuiz()">Yes</button>
+                <button id="no-button" onmouseover="moveNoButton()">No</button>
+            </div>
             <h4>There's only one right answer.</h4>
         </div>
     </div>
