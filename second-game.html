@@ -12,8 +12,6 @@
             align-items: center;
             justify-content: flex-start;
             min-height: 100vh;
-            max-height: 100vh;
-            overflow-y: auto;
             background-color: #ffefdb; /* Light fall background */
             font-family: Arial, sans-serif;
             color: #5b3d00; /* Dark brown text color */
@@ -31,7 +29,6 @@
             flex-direction: column;
             align-items: center;
             max-width: 100vw;
-            overflow: hidden;
         }
 
         .word-search {
@@ -40,6 +37,8 @@
             grid-gap: 2px;
             margin: 20px 0;
             max-width: 100vw;
+            max-height: 400px; /* Set max height for scrollability */
+            overflow-y: auto; /* Enable vertical scrolling */
         }
 
         .cell {
@@ -78,6 +77,8 @@
             border-radius: 8px;
             width: 90vw;
             max-width: 400px;
+            max-height: 150px; /* Set max height for scrollability */
+            overflow-y: auto; /* Enable vertical scrolling */
         }
 
         .word-list {
@@ -239,34 +240,26 @@
         }
 
         function checkWord() {
-            const selectedWord = selectedCells.map(c => c.letter).join('');
-            const reversedWord = selectedWord.split('').reverse().join('');
-
-            for (const word of words) {
-                if ((selectedWord === word || reversedWord === word) && !foundWords.includes(word)) {
-                    foundWords.push(word);
-                    highlightWord();
-                    markWordAsFound(word);
-                    break;
-                }
+            const selectedLetters = selectedCells.map(c => c.letter).join('');
+            if (words.includes(selectedLetters)) {
+                foundWords.push(selectedLetters);
+                markAsFound(selectedLetters);
+                selectedCells.forEach(c => {
+                    const cell = document.querySelector(`.cell[data-row="${c.row}"][data-col="${c.col}"]`);
+                    cell.classList.add('found');
+                });
+                selectedCells = []; // Reset selection
             }
         }
 
-        function highlightWord() {
-            for (const cell of selectedCells) {
-                const cellDiv = document.querySelector(`[data-row="${cell.row}"][data-col="${cell.col}"]`);
-                cellDiv.classList.add('found');
-                cellDiv.classList.remove('selected');
-            }
-            selectedCells = []; // Clear selected cells
-        }
-
-        function markWordAsFound(word) {
+        function markAsFound(word) {
             const wordElement = document.getElementById(`word-${word}`);
-            wordElement.classList.add('found-word');
+            if (wordElement) {
+                wordElement.classList.add('found-word');
+            }
         }
 
-        generateWordSearch(); // Initialize the word search when the page loads
+        generateWordSearch();
     </script>
 </body>
 </html>
