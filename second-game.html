@@ -3,72 +3,259 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Love Quest</title>
+    <title>Love Quest - Word Search</title>
+    <link rel="stylesheet" href="styles.css">
     <style>
         body {
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            justify-content: center; 
-            height: 100vh; 
-            margin: 0;
-            background-color: #f9f1e3; 
-            font-family: Arial, sans-serif; 
-            overflow: hidden; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            background-color: #ffefdb; 
+            font-family: Arial, sans-serif;
+            color: #5b3d00; 
+            padding: 20px;
+            box-sizing: border-box;
         }
 
         h1 {
-            color: #b65c39; 
-            margin-bottom: 20px; 
+            margin-bottom: 10px;
+            font-size: 1.5rem;
         }
 
-        button {
-            background-color: #b65c39; 
-            color: white; 
-            border: none;
-            border-radius: 5px; 
-            padding: 10px 20px; 
-            font-size: 16px; 
-            cursor: pointer; 
-            margin: 10px; 
-            transition: background-color 0.3s ease; 
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 800px; 
         }
 
-        button:hover {
-            background-color: #a55b34; 
+        .word-search {
+            display: grid;
+            grid-template-columns: repeat(15, 35px); 
+            grid-gap: 2px;
+            margin: 20px 0;
+            max-width: 100%;
+            background-color: #fff; 
+            padding: 10px; 
+            border: 1px solid #c49a3d; 
+        }
+
+        .cell {
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #e2b052; 
+            border: 1px solid #c49a3d; 
+            font-weight: bold;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .cell:hover {
+            background-color: #ffd700;
+        }
+
+        .selected {
+            background-color: #5b3d00; 
+            color: white;
+        }
+
+        .found {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .word-list-container {
+            margin: 20px 0;
+            padding: 10px;
+            border: 1px solid #c49a3d;
+            background-color: #fdf2e9;
+            border-radius: 8px;
+            width: 100%; 
+            max-width: 400px; 
+        }
+
+        .word-list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); 
+            grid-gap: 10px;
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .word-list li {
+            margin: 5px 0;
+            font-size: 1.1em;
+            text-align: center;
+        }
+
+        .found-word {
+            text-decoration: line-through;
+            color: #28a745;
+        }
+
+        
+        @media (max-width: 600px) {
+            .cell {
+                width: 30px;
+                height: 30px;
+                font-size: 1em;
+            }
+
+            .word-search {
+                grid-template-columns: repeat(15, 30px);
+            }
+
+            .word-list-container {
+                width: 80vw;
+            }
         }
     </style>
-    <script>
-        function startQuiz() {
-            window.location.href = 'second-game.html';
-        }
-
-        function moveNoButton() {
-            const noButton = document.getElementById('no-button');
-            const randomX = (Math.random() * 600) - 300; 
-            const randomY = (Math.random() * 600) - 300; 
-            const randomRotation = (Math.random() * 360); 
-
-            noButton.style.transform = `translate(${randomX}px, ${randomY}px) rotate(${randomRotation}deg)`; 
-            noButton.style.backgroundColor = getRandomColor(); 
-        }
-
-        function getRandomColor() {
-            const letters = '0123456789ABCDEF';
-            let color = '#';
-            for (let i = 0; i < 6; i++) {
-                color += letters[Math.floor(Math.random() * 16)];
-            }
-            return color;
-        }
-    </script>
 </head>
 <body>
-    <h1>Do you love me?</h1>
-    <button id="yes-button" onclick="startQuiz()">Yes</button>
-    <button id="no-button" onmouseover="moveNoButton()">No</button>
-    <h4>There's only one right answer.</h4>
+    <div class="container">
+        <div class="word-list-container">
+            <ul id="wordList" class="word-list">
+                <li id="word-LIMMY">LIMMY</li>
+                <li id="word-LOVE">LOVE</li>
+                <li id="word-NIGERIA">NIGERIA</li>
+                <li id="word-LIZARD">LIZARD</li>
+                <li id="word-MONKEYMAN">MONKEY MAN</li>
+                <li id="word-FIREANDICE">FIRE AND ICE</li>
+                <li id="word-HUG">HUG</li>
+                <li id="word-VIAVITE">VIA VITE</li>
+                <li id="word-CINCINNATI">CINCINNATI</li>
+                <li id="word-SANDZ">SANDZ</li>
+            </ul>
+        </div>
+        <div id="wordSearch" class="word-search"></div>
+    </div>
+    
+    <script>
+        const words = ['LIMMY', 'LOVE', 'NIGERIA', 'LIZARD', 'MONKEYMAN', 'FIREANDICE', 'HUG', 'VIAVITE', 'CINCINNATI', 'SANDZ'];
+        const gridSize = 15; 
+        const grid = [];
+        let selectedCells = [];
+        let foundWords = [];
 
-    <script src="script.js"></script>
+        for (let i = 0; i < gridSize; i++) {
+            grid[i] = new Array(gridSize).fill('');
+        }
+
+        function generateWordSearch() {
+            for (const word of words) {
+                placeWord(word);
+            }
+            fillRandomLetters();
+            renderGrid();
+        }
+
+        function placeWord(word) {
+            let placed = false;
+            while (!placed) {
+                const direction = Math.floor(Math.random() * 3); 
+                const row = Math.floor(Math.random() * gridSize);
+                const col = Math.floor(Math.random() * gridSize);
+
+                if (direction === 0 && col + word.length <= gridSize) { 
+                    if (grid[row].slice(col, col + word.length).every(cell => cell === '')) {
+                        for (let i = 0; i < word.length; i++) {
+                            grid[row][col + i] = word[i];
+                        }
+                        placed = true;
+                    }
+                } else if (direction === 1 && row + word.length <= gridSize) { 
+                    if (grid.slice(row, row + word.length).every(row => row[col] === '')) {
+                        for (let i = 0; i < word.length; i++) {
+                            grid[row + i][col] = word[i];
+                        }
+                        placed = true;
+                    }
+                } else if (direction === 2 && row + word.length <= gridSize && col + word.length <= gridSize) { 
+                    let validPlacement = true;
+                    for (let i = 0; i < word.length; i++) {
+                        if (grid[row + i][col + i] !== '') {
+                            validPlacement = false;
+                            break;
+                        }
+                    }
+                    if (validPlacement) {
+                        for (let i = 0; i < word.length; i++) {
+                            grid[row + i][col + i] = word[i];
+                        }
+                        placed = true;
+                    }
+                }
+            }
+        }
+
+        function fillRandomLetters() {
+            for (let i = 0; i < gridSize; i++) {
+                for (let j = 0; j < gridSize; j++) {
+                    if (grid[i][j] === '') {
+                        grid[i][j] = String.fromCharCode(65 + Math.floor(Math.random() * 26)); 
+                    }
+                }
+            }
+        }
+
+        function renderGrid() {
+            const wordSearchDiv = document.getElementById('wordSearch');
+            wordSearchDiv.innerHTML = '';
+            for (let i = 0; i < gridSize; i++) {
+                for (let j = 0; j < gridSize; j++) {
+                    const cellDiv = document.createElement('div');
+                    cellDiv.className = 'cell';
+                    cellDiv.textContent = grid[i][j];
+                    cellDiv.setAttribute('data-row', i);
+                    cellDiv.setAttribute('data-col', j);
+                    cellDiv.onclick = () => toggleCell(cellDiv, i, j);
+                    wordSearchDiv.appendChild(cellDiv);
+                }
+            }
+        }
+
+        function toggleCell(cell, row, col) {
+            const cellIndex = selectedCells.findIndex(c => c.row === row && c.col === col);
+            if (cellIndex > -1) {
+                cell.classList.remove('selected');
+                selectedCells.splice(cellIndex, 1);
+            } else {
+                cell.classList.add('selected');
+                selectedCells.push({ row, col, letter: grid[row][col] });
+            }
+            
+            checkWord();
+        }
+
+        function checkWord() {
+            const selectedLetters = selectedCells.map(c => c.letter).join('');
+            if (words.includes(selectedLetters)) {
+                foundWords.push(selectedLetters);
+                markAsFound(selectedLetters);
+                selectedCells.forEach(c => {
+                    const cell = document.querySelector(`.cell[data-row="${c.row}"][data-col="${c.col}"]`);
+                    cell.classList.add('found');
+                });
+                selectedCells = [];
+            }
+        }
+
+        function markAsFound(word) {
+            const wordElement = document.getElementById(`word-${word}`);
+            if (wordElement) {
+                wordElement.classList.add('found-word');
+            }
+        }
+
+        generateWordSearch();
+    </script>
 </body>
 </html>
