@@ -3,147 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Love Quest</title>
-    <link rel="stylesheet" href="styles.css">
-
-    <!-- Add the falling leaves CSS styles -->
+    <title>Falling Leaves</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f9f1e3;
+            background-color: #f9f1e3; /* Fall-themed background color */
+            font-family: 'Signika Negative', Asap, sans-serif;
             color: #4e3b31;
-            text-align: center;
-            padding: 20px;
             overflow: hidden;
         }
 
-        h1 {
-            color: #b65c39;
+        .dot {
+            width: 35px;
+            height: 35px;
+            position: absolute;
+            background: url(http://www.clipartqueen.com/image-files/red-lobed-fall-clipart-leaf.png);
+            background-size: 100% 100%;
+            animation: fall linear infinite;
         }
 
-        button {
-            background-color: #b65c39;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            margin: 10px;
-            transition: background-color 0.3s ease;
-        }
-
-        button:hover {
-            background-color: #a55b34;
-        }
-
-        #no-button {
+        #container {
+            width: 100%;
+            height: 100%;
             position: relative;
         }
 
-        /* Falling Leaves Styles */
-        section {
-            height: 100%;
-            width: 100%;
+        #logo {
+            left: 50%;
+            top: 50%;
             position: absolute;
-            background:(#f9f1e3);
-            top: 0;
-            left: 0;
-            z-index: -1; /* Behind the main content */
+            border-radius: 10px;
+            transform: translate(-50%, -50%);
         }
-
-        .leaf {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-        }
-
-        .leaf div {
-            position: absolute;
-            display: block;
-        }
-
-        .leaf div:nth-child(1) { left: 20%; animation: fall 15s linear infinite; animation-delay: -2s; }
-        .leaf div:nth-child(2) { left: 70%; animation: fall 15s linear infinite; animation-delay: -4s; }
-        .leaf div:nth-child(3) { left: 10%; animation: fall 20s linear infinite; animation-delay: -7s; }
-        .leaf div:nth-child(4) { left: 50%; animation: fall 18s linear infinite; animation-delay: -5s; }
-        .leaf div:nth-child(5) { left: 85%; animation: fall 14s linear infinite; animation-delay: -5s; }
-        .leaf div:nth-child(6) { left: 15%; animation: fall 16s linear infinite; animation-delay: -10s; }
-        .leaf div:nth-child(7) { left: 90%; animation: fall 15s linear infinite; animation-delay: -4s; }
 
         @keyframes fall {
-            0% { opacity: 1; top: -10%; transform: translateX(20px) rotate(0deg); }
-            20% { opacity: 0.8; transform: translateX(-20px) rotate(45deg); }
-            40% { transform: translateX(-20px) rotate(90deg); }
-            60% { transform: translateX(-20px) rotate(135deg); }
-            80% { transform: translateX(-20px) rotate(180deg); }
-            100% { top: 110%; transform: translateX(-20px) rotate(225deg); }
-        }
-
-        .leaf1 {
-            transform: rotateX(180deg);
-        }
-
-        h2 {
-            position: absolute;
-            top: 40%;
-            width: 100%;
-            font-size: 2em;
-            text-align: center;
-            color: #fff;
-            transform: translateY(-50%);
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+            }
+            100% {
+                transform: translateY(110vh) rotate(360deg);
+            }
         }
     </style>
-    
-    <script>
-        function startQuiz() {
-            window.location.href = 'Wordsearch.html';
-        }
-
-        function moveNoButton() {
-            const noButton = document.getElementById('no-button');
-            const randomX = (Math.random() * 600) - 300;
-            const randomY = (Math.random() * 600) - 300;
-            const randomRotation = (Math.random() * 360);
-            noButton.style.transform = `translate(${randomX}px, ${randomY}px) rotate(${randomRotation}deg)`;
-            noButton.style.backgroundColor = getRandomColor();
-        }
-
-        function getRandomColor() {
-            const letters = '0123456789ABCDEF';
-            let color = '#';
-            for (let i = 0; i < 6; i++) {
-                color += letters[Math.floor(Math.random() * 16)];
-            }
-            return color;
-        }
-    </script>
 </head>
 <body>
-    <div class="quiz-container">
-        <div id="opening-screen" class="opening-screen">
-            <h1>Do you love me?</h1>
-            <button id="yes-button" onclick="startQuiz()">Yes</button>
-            <button id="no-button" onmouseover="moveNoButton()">No</button>
-            <h4>There's only one right answer.</h4>
-        </div>
+    <div id="container">
+        <img id="logo" src="http://gravatar.com/avatar/5a224f121f96bd037bf6c1c1e2b686fb?s=256" alt="Logo" height="120" width="120">
     </div>
 
-    <!-- Falling leaves section -->
-    <section>
-        <div class="leaf">
-            <div><img src="http://www.pngmart.com/files/1/Fall-Autumn-Leaves-Transparent-PNG.png" height="75px" width="75px"></div>
-            <div><img src="http://www.pngmart.com/files/1/Autumn-Fall-Leaves-Pictures-Collage-PNG.png" height="75px" width="75px"></div>
-            <div><img src="http://www.pngmart.com/files/1/Autumn-Fall-Leaves-Clip-Art-PNG.png" height="75px" width="75px"></div>
-            <div><img src="http://www.pngmart.com/files/1/Green-Leaves-PNG-File.png" height="75px" width="75px"></div>
-            <div><img src="http://www.pngmart.com/files/1/Transparent-Autumn-Leaves-Falling-PNG.png" height="75px" width="75px"></div>
-            <div><img src="http://www.pngmart.com/files/1/Realistic-Autumn-Fall-Leaves-PNG.png" height="75px" width="75px"></div>
-            <div><img src="http://cdn.clipart-db.ru/rastr/autumn_leaves_025.png" height="75px" width="75px"></div>
-        </div>
-    </section>
+    <script>
+        // JavaScript to create falling leaves
+        var totalLeaves = 30;
+        var container = document.getElementById("container");
+        var w = window.innerWidth;
+        var h = window.innerHeight;
 
-    <script src="script.js"></script>
+        for (var i = 0; i < totalLeaves; i++) {
+            var leaf = document.createElement('div');
+            leaf.classList.add('dot');
+            leaf.style.left = Math.random() * w + 'px'; // Random horizontal position
+            leaf.style.animationDuration = (6 + Math.random() * 10) + 's'; // Random speed
+            leaf.style.animationDelay = (-Math.random() * 10) + 's'; // Random start delay
+            leaf.style.transform = 'rotate(' + (Math.random() * 360) + 'deg)'; // Random initial rotation
+            container.appendChild(leaf);
+        }
+    </script>
 </body>
 </html>
