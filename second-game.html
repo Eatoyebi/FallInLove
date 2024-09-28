@@ -38,6 +38,12 @@
             border: 1px solid #c49a3d; /* Border color */
             font-weight: bold;
             font-size: 1.2em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .cell:hover {
+            background-color: #ffd700; /* Highlight on hover */
         }
 
         .found {
@@ -101,6 +107,7 @@
             for (const word of words) {
                 placeWord(word);
             }
+            fillRandomLetters();
             renderGrid();
         }
 
@@ -129,6 +136,16 @@
             }
         }
 
+        function fillRandomLetters() {
+            for (let i = 0; i < gridSize; i++) {
+                for (let j = 0; j < gridSize; j++) {
+                    if (grid[i][j] === '') {
+                        grid[i][j] = String.fromCharCode(65 + Math.floor(Math.random() * 26)); // Fill with random letters
+                    }
+                }
+            }
+        }
+
         function renderGrid() {
             const wordSearchDiv = document.getElementById('wordSearch');
             wordSearchDiv.innerHTML = '';
@@ -136,7 +153,8 @@
                 for (let cell of row) {
                     const cellDiv = document.createElement('div');
                     cellDiv.className = 'cell';
-                    cellDiv.textContent = cell === '' ? String.fromCharCode(65 + Math.floor(Math.random() * 26)) : cell; // Fill with random letters
+                    cellDiv.textContent = cell;
+                    cellDiv.onclick = () => cellDiv.classList.toggle('found'); // Toggle found state on click
                     wordSearchDiv.appendChild(cellDiv);
                 }
             }
