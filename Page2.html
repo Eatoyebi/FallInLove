@@ -6,31 +6,7 @@
     <title>Love Quest</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            background-color: #f8f9fa;
-            font-family: Arial, sans-serif;
-        }
-
-        .quiz-container {
-            text-align: center;
-        }
-
-        button {
-            margin: 10px;
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: transform 0.3s ease, background-color 0.3s; /* Smooth transition */
-        }
-
-        #no-button {
-            position: relative;
-        }
+        /* Include CSS styles directly or link to your styles.css file */
     </style>
     <script>
         function startQuiz() {
@@ -40,7 +16,6 @@
 
         function moveNoButton() {
             const noButton = document.getElementById('no-button');
-            // Get random values to move the button dramatically
             const randomX = (Math.random() * 600) - 300; // Move horizontally between -300px and +300px
             const randomY = (Math.random() * 600) - 300; // Move vertically between -300px and +300px
             const randomRotation = (Math.random() * 360); // Random rotation
@@ -57,6 +32,19 @@
             }
             return color;
         }
+
+        // Function to create falling leaves
+        function createFallingLeaves() {
+            for (let i = 0; i < 10; i++) { // Change number of leaves as desired
+                const leaf = document.createElement('div');
+                leaf.className = 'leaf';
+                leaf.style.left = Math.random() * 100 + 'vw'; // Random horizontal position
+                leaf.style.animationDuration = (Math.random() * 3 + 3) + 's'; // Random speed
+                document.body.appendChild(leaf);
+            }
+        }
+
+        window.onload = createFallingLeaves; // Start creating leaves when the page loads
     </script>
 </head>
 <body>

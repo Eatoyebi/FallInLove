@@ -1,47 +1,64 @@
 body {
-    font-family: Arial, sans-serif;
+    background-color: #ffe6e6; /* Soft pink background */
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+}
+
+.quiz-container {
     text-align: center;
-    background-color: #f9f9f9;
-    padding: 20px; /* Added padding for better spacing */
+    position: relative; /* Enable absolute positioning for children */
 }
 
 h1 {
-    color: #e67e22; /* Customize as needed */
+    color: #d50000; /* Dark red for the main title */
+    font-size: 48px;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Slight shadow for depth */
 }
 
-h2 {
-    color: #333; /* Customize as needed */
+h4 {
+    color: #e67e22; /* Warm orange for emphasis */
 }
 
-input[type="password"] {
-    padding: 10px;
-    margin: 10px 0;
-    border: 2px solid #e67e22; /* Customize border color */
-    border-radius: 5px;
-}
-
-.button {
-    padding: 10px 20px;
-    background-color: #e67e22; /* Customize button color */
+button {
+    background-color: #e67e22; /* Orange background for buttons */
     color: white;
     border: none;
     border-radius: 5px;
+    font-size: 18px;
+    padding: 15px 30px;
     cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
 }
 
-.button:hover {
-    background-color: #d35400; /* Customize hover color */
+button:hover {
+    background-color: #d35400; /* Darker orange on hover */
 }
 
-#hint {
-    margin-top: 10px;
-    color: #e67e22; /* Customize as needed */
+#no-button {
+    position: relative;
 }
 
-/* Style for the GIF */
-.gif-small {
-    max-width: 300px; /* Max width of the GIF */
-    width: 100%; /* Makes the GIF responsive */
-    margin: 20px auto; /* Center the GIF */
-    display: block; /* Ensure it behaves like a block element */
+@keyframes fall {
+    0% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(100vh);
+    }
+}
+
+/* Falling leaves effect */
+.leaf {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-image: url('path_to_leaf_image.png'); /* Replace with your leaf image path */
+    background-size: cover;
+    animation: fall 5s linear infinite; /* Adjust duration for speed */
 }
