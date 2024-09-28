@@ -1,4 +1,3 @@
-
 function checkPassword() {
     const password = document.getElementById('password').value;
     const correctPassword = '032224';
@@ -15,7 +14,6 @@ function checkPassword() {
 document.addEventListener('DOMContentLoaded', (event) => {
     const noButton = document.querySelector('.button-no');
     
-    
     if (noButton) {
         noButton.addEventListener('mouseover', () => {
             const randomX = Math.floor(Math.random() * (window.innerWidth - 100)); 
@@ -25,18 +23,4 @@ document.addEventListener('DOMContentLoaded', (event) => {
             noButton.style.top = `${randomY}px`; 
         });
     }
-})
-
-function createFallingLeaves() {
-    for (let i = 0; i < 10; i++) { 
-        const leaf = document.createElement('div');
-        leaf.className = 'leaf';
-        leaf.style.left = Math.random() * 100 + 'vw'; 
-        leaf.style.animationDuration = (Math.random() * 3 + 3) + 's';
-        document.body.appendChild(leaf);
-    }
-}
-
-window.onload = createFallingLeaves; 
-
-;
+});
