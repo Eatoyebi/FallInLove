@@ -8,66 +8,45 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f9f1e3; /* Light background for fall theme */
-            color: #4e3b31; /* Dark brown color for text */
-            text-align: center; /* Centering text */
+            background-color: #f9f1e3;
+            color: #4e3b31;
+            text-align: center;
             padding: 20px;
-            overflow: hidden; /* Prevent scrollbars */
+            overflow: hidden;
         }
         h1 {
-            color: #b65c39; /* Warm orange for headings */
+            color: #b65c39;
         }
         button {
-            background-color: #b65c39; /* Button color */
-            color: white; /* Button text color */
+            background-color: #b65c39;
+            color: white;
             border: none;
-            border-radius: 5px; /* Rounded corners */
-            padding: 10px 20px; /* Button padding */
-            font-size: 16px; /* Font size for button */
-            cursor: pointer; /* Pointer cursor on hover */
-            margin: 10px; /* Margin for spacing */
-            transition: background-color 0.3s ease; /* Transition effect */
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px;
+            transition: background-color 0.3s ease;
         }
         button:hover {
-            background-color: #a55b34; /* Darker orange on hover */
+            background-color: #a55b34;
         }
         #no-button {
-            position: relative; /* For moving effect */
-        }
-        .leaf {
-            position: absolute;
-            top: -10%; /* Start above the viewport */
-            width: 30px; /* Adjust leaf size */
-            height: 30px; /* Adjust leaf size */
-            background-image: url('path/to/leaf.png'); /* Replace with actual leaf image path */
-            background-size: cover; /* Ensure image covers div */
-            opacity: 0.8; /* Slightly transparent leaves */
-            animation: fall linear infinite; /* Apply falling animation */
-        }
-
-        @keyframes fall {
-            0% {
-                transform: translateY(0); /* Start from the top */
-            }
-            100% {
-                transform: translateY(100vh); /* Fall to the bottom of the viewport */
-            }
+            position: relative;
         }
     </style>
     <script>
         function startQuiz() {
-            // Redirect to the word search game
             window.location.href = 'Wordsearch.html';
         }
 
         function moveNoButton() {
             const noButton = document.getElementById('no-button');
-            const randomX = (Math.random() * 600) - 300; // Move horizontally between -300px and +300px
-            const randomY = (Math.random() * 600) - 300; // Move vertically between -300px and +300px
-            const randomRotation = (Math.random() * 360); // Random rotation
-
-            noButton.style.transform = `translate(${randomX}px, ${randomY}px) rotate(${randomRotation}deg)`; // Move and rotate button
-            noButton.style.backgroundColor = getRandomColor(); // Change button color dramatically
+            const randomX = (Math.random() * 600) - 300;
+            const randomY = (Math.random() * 600) - 300;
+            const randomRotation = (Math.random() * 360);
+            noButton.style.transform = `translate(${randomX}px, ${randomY}px) rotate(${randomRotation}deg)`;
+            noButton.style.backgroundColor = getRandomColor();
         }
 
         function getRandomColor() {
@@ -78,19 +57,6 @@
             }
             return color;
         }
-
-        // Function to create falling leaves
-        function createFallingLeaves() {
-            for (let i = 0; i < 10; i++) { // Change number of leaves as desired
-                const leaf = document.createElement('div');
-                leaf.className = 'leaf';
-                leaf.style.left = Math.random() * 100 + 'vw'; // Random horizontal position
-                leaf.style.animationDuration = (Math.random() * 3 + 3) + 's'; // Random speed
-                document.body.appendChild(leaf);
-            }
-        }
-
-        window.onload = createFallingLeaves; // Start creating leaves when the page loads
     </script>
 </head>
 <body>
