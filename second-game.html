@@ -46,6 +46,11 @@
             background-color: #ffd700; /* Highlight on hover */
         }
 
+        .selected {
+            background-color: #5b3d00; /* Highlight selected cells */
+            color: white;
+        }
+
         .found {
             background-color: #28a745; /* Color for found words */
             color: white;
@@ -95,8 +100,9 @@
     
     <script>
         const words = ['LIMMY', 'LOVE', 'NIGERIA', 'LIZARD', 'MONKEYMAN', 'FIREANDICE', 'HUG', 'VIAVITE', 'CINCINNATI'];
-        const gridSize = 10; // Size of the word search grid
+        const gridSize = 10;
         const grid = [];
+        let selectedCells = [];
 
         // Initialize the grid with empty strings
         for (let i = 0; i < gridSize; i++) {
@@ -149,27 +155,51 @@
         function renderGrid() {
             const wordSearchDiv = document.getElementById('wordSearch');
             wordSearchDiv.innerHTML = '';
-            for (let row of grid) {
-                for (let cell of row) {
+            for (let i = 0; i < gridSize; i++) {
+                for (let j = 0; j < gridSize; j++) {
                     const cellDiv = document.createElement('div');
                     cellDiv.className = 'cell';
-                    cellDiv.textContent = cell;
-                    cellDiv.onclick = () => cellDiv.classList.toggle('found'); // Toggle found state on click
+                    cellDiv.textContent = grid[i][j];
+                    cellDiv.setAttribute('data-row', i);
+                    cellDiv.setAttribute('data-col', j);
+                    cellDiv.onclick = () => toggleCell(cellDiv, i, j);
                     wordSearchDiv.appendChild(cellDiv);
                 }
             }
         }
 
+        function toggleCell(cell, row, col) {
+            const cellIndex = selectedCells.findIndex(c => c.row === row && c.col === col);
+            if (cellIndex > -1) {
+                // Cell already selected, deselect it
+                cell.classList.remove('selected');
+                selectedCells.splice(cellIndex, 1);
+            } else {
+                // Select the cell
+                cell.classList.add('selected');
+                selectedCells.push({ row, col, letter: grid[row][col] });
+            }
+        }
+
         function checkWords() {
-            const cells = document.querySelectorAll('.cell');
-            words.forEach(word => {
-                cells.forEach(cell => {
-                    if (cell.textContent === word) {
-                        cell.classList.add('found');
-                    }
+            const selectedWord = selectedCells.map(c => c.letter).join('');
+            const reversedWord = selectedWord.split('').reverse().join('');
+
+            if (words.includes(selectedWord) || words.includes(reversedWord)) {
+                selectedCells.forEach(cell => {
+                    const cellDiv = document.querySelector(`[data-row="${cell.row}"][data-col="${cell.col}"]`);
+                    cellDiv.classList.add('found');
+                    cellDiv.classList.remove('selected');
                 });
-            });
-            alert('Check the grid to see which words you found!');
+                alert('You found a word!');
+            } else {
+                alert('Not a valid word.');
+                selectedCells.forEach(cell => {
+                    const cellDiv = document.querySelector(`[data-row="${cell.row}"][data-col="${cell.col}"]`);
+                    cellDiv.classList.remove('selected');
+                });
+            }
+            selectedCells = [];
         }
 
         // Generate the word search when the page loads
