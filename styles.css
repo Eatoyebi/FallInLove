@@ -44,6 +44,13 @@ button:hover {
     position: relative;
 }
 
+.gif-container {
+    background-color: #ffe6e6; /* Match your page's background */
+    padding: 20px; /* Add padding around the GIF */
+    border-radius: 10px; /* Rounded corners for a softer look */
+    display: inline-block; /* Allows the container to fit the size of the GIF */
+}
+
 @keyframes fall {
     0% {
         transform: translateY(-100%);
