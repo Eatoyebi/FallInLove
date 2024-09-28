@@ -32,21 +32,15 @@
             max-width: 800px; 
         }
 
-        .word-search-container {
-            height: 500px; 
-            overflow-y: auto; 
-            width: 100%;
-            background-color: #fff; 
-            border: 1px solid #c49a3d; 
-            margin: 20px 0; 
-        }
-
         .word-search {
             display: grid;
             grid-template-columns: repeat(15, 35px); 
             grid-gap: 2px;
-            margin: 0; 
-            padding: 10px 0; 
+            margin: 20px 0;
+            max-width: 100%;
+            background-color: #fff; 
+            padding: 10px; 
+            border: 1px solid #c49a3d; 
         }
 
         .cell {
@@ -64,7 +58,7 @@
         }
 
         .cell:hover {
-            background-color: #ffd700;
+            background-color: #ffd700; 
         }
 
         .selected {
@@ -104,7 +98,7 @@
 
         .found-word {
             text-decoration: line-through;
-            color: #28a745;
+            color: #28a745; 
         }
 
         @media (max-width: 600px) {
@@ -126,6 +120,7 @@
 </head>
 <body>
     <div class="container">
+        <h1>Love Quest - Word Search</h1>
         <div class="word-list-container">
             <ul id="wordList" class="word-list">
                 <li id="word-LIMMY">LIMMY</li>
@@ -140,9 +135,7 @@
                 <li id="word-SANDZ">SANDZ</li>
             </ul>
         </div>
-        <div id="wordSearch" class="word-search-container">
-            <div class="word-search"></div>
-        </div>
+        <div id="wordSearch" class="word-search"></div>
     </div>
     
     <script>
@@ -207,14 +200,14 @@
             for (let i = 0; i < gridSize; i++) {
                 for (let j = 0; j < gridSize; j++) {
                     if (grid[i][j] === '') {
-                        grid[i][j] = String.fromCharCode(65 + Math.floor(Math.random() * 26)); 
+                        grid[i][j] = String.fromCharCode(65 + Math.floor(Math.random() * 26));
                     }
                 }
             }
         }
 
         function renderGrid() {
-            const wordSearchDiv = document.querySelector('.word-search');
+            const wordSearchDiv = document.getElementById('wordSearch');
             wordSearchDiv.innerHTML = '';
             for (let i = 0; i < gridSize; i++) {
                 for (let j = 0; j < gridSize; j++) {
