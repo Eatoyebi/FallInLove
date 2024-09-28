@@ -14,10 +14,15 @@
             padding: 20px;
             overflow: hidden; /* Hide overflow */
             position: relative; /* Needed for absolute positioning of leaves */
+            height: 100vh; /* Full viewport height for centering */
+            display: flex; /* Use flexbox for centering */
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
         }
 
         h1 {
             color: #b65c39;
+            margin-bottom: 20px; /* Space between the question and buttons */
         }
         button {
             background-color: #b65c39;
