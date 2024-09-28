@@ -10,34 +10,48 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            height: 100vh;
+            justify-content: flex-start;
+            min-height: 100vh;
+            max-height: 100vh;
+            overflow-y: auto;
             background-color: #ffefdb; /* Light fall background */
             font-family: Arial, sans-serif;
             color: #5b3d00; /* Dark brown text color */
+            padding: 20px;
+            box-sizing: border-box;
         }
 
         h1 {
-            margin-bottom: 20px;
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 100vw;
+            overflow: hidden;
         }
 
         .word-search {
             display: grid;
-            grid-template-columns: repeat(10, 40px); /* Adjust the number of columns */
+            grid-template-columns: repeat(10, 35px); /* Adjust the number of columns */
             grid-gap: 2px;
             margin: 20px 0;
+            max-width: 100vw;
         }
 
         .cell {
-            width: 40px;
-            height: 40px;
+            width: 35px;
+            height: 35px;
             display: flex;
             align-items: center;
             justify-content: center;
             background-color: #e2b052; /* Fall-themed cell color */
             border: 1px solid #c49a3d; /* Border color */
             font-weight: bold;
-            font-size: 1.2em;
+            font-size: 1.1em;
             cursor: pointer;
             transition: background-color 0.3s;
         }
@@ -56,15 +70,36 @@
             color: white;
         }
 
+        .word-list-container {
+            max-height: 150px;
+            overflow-y: auto;
+            margin: 20px 0;
+            padding: 10px;
+            border: 1px solid #c49a3d;
+            background-color: #fdf2e9;
+            border-radius: 8px;
+            width: 90vw;
+            max-width: 400px;
+        }
+
         .word-list {
             list-style-type: none;
             padding: 0;
-            margin: 20px 0;
+            margin: 0;
         }
 
         .word-list li {
             margin: 5px 0;
             font-size: 1.1em;
+        }
+
+        .found-word {
+            text-decoration: line-through;
+            color: #28a745; /* Green to indicate a found word */
+        }
+
+        .button-container {
+            margin-top: 10px;
         }
 
         .button {
@@ -80,23 +115,47 @@
         .button:hover {
             background-color: #28a745; /* Hover effect */
         }
+
+        /* For smaller screens, reduce the size */
+        @media (max-width: 600px) {
+            .cell {
+                width: 30px;
+                height: 30px;
+                font-size: 1em;
+            }
+
+            .word-search {
+                grid-template-columns: repeat(10, 30px);
+            }
+
+            .word-list-container {
+                width: 80vw;
+                max-height: 120px;
+            }
+        }
     </style>
 </head>
 <body>
     <h1>Word Search Game!</h1>
-    <div id="wordSearch" class="word-search"></div>
-    <ul class="word-list">
-        <li>LIMMY</li>
-        <li>LOVE</li>
-        <li>NIGERIA</li>
-        <li>LIZARD</li>
-        <li>MONKEYMAN</li>
-        <li>FIREANDICE</li>
-        <li>HUG</li>
-        <li>VIAVITE</li>
-        <li>CINCINNATI</li>
-    </ul>
-    <button class="button" onclick="checkWords()">Check Answers</button>
+    <div class="container">
+        <div id="wordSearch" class="word-search"></div>
+        <div class="word-list-container">
+            <ul id="wordList" class="word-list">
+                <li>LIMMY</li>
+                <li>LOVE</li>
+                <li>NIGERIA</li>
+                <li>LIZARD</li>
+                <li>MONKEYMAN</li>
+                <li>FIREANDICE</li>
+                <li>HUG</li>
+                <li>VIAVITE</li>
+                <li>CINCINNATI</li>
+            </ul>
+        </div>
+        <div class="button-container">
+            <button class="button" onclick="checkWords()">Check Answers</button>
+        </div>
+    </div>
     
     <script>
         const words = ['LIMMY', 'LOVE', 'NIGERIA', 'LIZARD', 'MONKEYMAN', 'FIREANDICE', 'HUG', 'VIAVITE', 'CINCINNATI'];
@@ -191,19 +250,25 @@
                     cellDiv.classList.add('found');
                     cellDiv.classList.remove('selected');
                 });
-                alert('You found a word!');
-            } else {
-                alert('Not a valid word.');
-                selectedCells.forEach(cell => {
-                    const cellDiv = document.querySelector(`[data-row="${cell.row}"][data-col="${cell.col}"]`);
-                    cellDiv.classList.remove('selected');
-                });
+
+                markWordAsFound(selectedWord);
             }
-            selectedCells = [];
+            selectedCells = []; // Clear selected cells regardless of match
         }
 
-        // Generate the word search when the page loads
-        window.onload = generateWordSearch;
+        function markWordAsFound(word) {
+            // Find the word in the word list and strike it through
+            const wordListItems = document.querySelectorAll('#wordList li');
+            wordListItems.forEach(item => {
+                const text = item.textContent;
+                if (text === word || text === word.split('').reverse().join('')) {
+                    item.classList.add('found-word');
+                }
+            });
+        }
+
+        // Initialize the game
+        generateWordSearch();
     </script>
 </body>
 </html>
