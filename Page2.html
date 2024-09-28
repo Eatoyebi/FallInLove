@@ -3,85 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Love Quest</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Love Quest with Falling Leaves</title>
     <style>
+        /* Fall-themed background color */
         body {
             font-family: Arial, sans-serif;
-            background-color: #f9f1e3; /* Background color */
-            color: #4e3b31; /* Text color */
-            text-align: center; /* Center text */
-            height: 100vh; /* Full height of viewport */
-            display: flex; /* Use flexbox for alignment */
-            flex-direction: column; /* Align items vertically */
-            justify-content: center; /* Center vertically */
-            align-items: center; /* Center horizontally */
-            overflow: hidden; /* Hide overflow */
+            background-color: #f9f1e3;
+            color: #4e3b31;
+            text-align: center;
+            padding: 20px;
+            overflow: hidden;
+            position: relative; /* Needed for absolute positioning of leaves */
         }
+
         h1 {
-            color: #b65c39; /* Title color */
-            margin-bottom: 20px; /* Spacing between title and buttons */
+            color: #b65c39;
         }
         button {
-            background-color: #b65c39; /* Button background color */
-            color: white; /* Button text color */
-            border: none; /* No border */
-            border-radius: 5px; /* Rounded corners */
-            padding: 10px 20px; /* Button padding */
-            font-size: 16px; /* Button text size */
-            cursor: pointer; /* Pointer on hover */
-            margin: 10px; /* Button margin */
-            transition: background-color 0.3s ease; /* Transition effect */
+            background-color: #b65c39;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px;
+            transition: background-color 0.3s ease;
         }
         button:hover {
-            background-color: #a55b34; /* Button hover color */
+            background-color: #a55b34;
         }
         #no-button {
-            position: relative; /* Relative position for movement */
+            position: relative;
         }
-        #logo {
-            margin-bottom: 20px; /* Spacing for logo if needed */
-        }
+
+        /* Falling leaves */
         .dot {
-            width: 35px; /* Leaf width */
-            height: 35px; /* Leaf height */
-            position: absolute; /* Absolute positioning */
-            background: url(http://www.clipartqueen.com/image-files/red-lobed-fall-clipart-leaf.png); /* Leaf image */
-            background-size: 100% 100%; /* Leaf image size */
+            width: 35px;
+            height: 35px;
+            position: absolute;
+            background: url('http://www.clipartqueen.com/image-files/red-lobed-fall-clipart-leaf.png');
+            background-size: 100% 100%;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+            }
         }
     </style>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+</head>
+<body>
+    <div id="container">
+        <div id="opening-screen">
+            <h1>Do you love me?</h1>
+            <button id="yes-button" onclick="startQuiz()">Yes</button>
+            <button id="no-button" onmouseover="moveNoButton()">No</button>
+            <h4>There's only one right answer.</h4>
+        </div>
+    </div>
+
     <script>
-        var total = 30; // Total number of leaves
-        var container = document.getElementById("container"), 
-            w = window.innerWidth, 
-            h = window.innerHeight;
-
-        // Create leaves
-        for (var i = 0; i < total; i++) { 
-            var Div = document.createElement('div');
-            Div.classList.add('dot');
-            TweenLite.set(Div, { x: R(0, w), y: R(-200, -150) });
-            container.appendChild(Div);
-            animateLeaf(Div);
+        // Moving "No" button functionality
+        function startQuiz() {
+            window.location.href = 'Wordsearch.html';
         }
 
-        // Animate leaves
-        function animateLeaf(elm) {   
-            TweenMax.to(elm, R(6, 15), { y: h + 100, ease: Linear.easeNone, repeat: -1 });
-            TweenMax.to(elm, R(4, 8), { x: '+=100', rotationZ: R(0, 180), repeat: -1, yoyo: true, ease: Sine.easeInOut });
-            TweenMax.to(elm, R(2, 8), { rotationX: R(0, 360), rotationY: R(0, 360), repeat: -1, yoyo: true, ease: Sine.easeInOut });
-        }
-
-        // Random number generator
-        function R(min, max) { return min + Math.random() * (max - min) };
-
-        // Move the "No" button randomly
         function moveNoButton() {
             const noButton = document.getElementById('no-button');
-            const randomX = (Math.random() * (window.innerWidth - 150)) - 75; // Adjust for button width
-            const randomY = (Math.random() * (window.innerHeight - 150)) - 75; // Adjust for button height
-            noButton.style.transform = `translate(${randomX}px, ${randomY}px)`;
+            const randomX = (Math.random() * 600) - 300; // Change range as needed
+            const randomY = (Math.random() * 600) - 300; // Change range as needed
+            const randomRotation = (Math.random() * 360);
+            noButton.style.transform = `translate(${randomX}px, ${randomY}px) rotate(${randomRotation}deg)`;
             noButton.style.backgroundColor = getRandomColor();
         }
 
@@ -94,18 +90,21 @@
             return color;
         }
 
-        function startQuiz() {
-            window.location.href = 'Wordsearch.html'; // Redirect to quiz page
+        // Falling leaves functionality
+        var totalLeaves = 30; // Total number of leaves
+        var container = document.getElementById("container");
+        var w = window.innerWidth;
+        var h = window.innerHeight;
+
+        for (var i = 0; i < totalLeaves; i++) {
+            var leaf = document.createElement('div');
+            leaf.classList.add('dot');
+            // Set initial position and animation
+            leaf.style.left = Math.random() * w + 'px'; // Random X position
+            leaf.style.top = Math.random() * -100 + 'px'; // Start above the viewport
+            leaf.style.animation = `fall ${Math.random() * 3 + 2}s linear infinite`; // Random duration for fall
+            container.appendChild(leaf);
         }
     </script>
-</head>
-<body>
-    <div id="container">
-        <img id="logo" src="http://gravatar.com/avatar/5a224f121f96bd037bf6c1c1e2b686fb?s=256" alt="Smiley face" height="120" width="120">
-        <h1>Do you love me?</h1>
-        <button id="yes-button" onclick="startQuiz()">Yes</button>
-        <button id="no-button" onmouseover="moveNoButton()">No</button>
-        <h4>There's only one right answer.</h4>
-    </div>
 </body>
 </html>
