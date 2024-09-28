@@ -12,7 +12,6 @@ function checkPassword() {
     }
 }
 
-
 document.addEventListener('DOMContentLoaded', (event) => {
     const noButton = document.querySelector('.button-no');
     
