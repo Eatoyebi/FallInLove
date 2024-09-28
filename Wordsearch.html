@@ -228,31 +228,29 @@
                 selectedCells.splice(cellIndex, 1);
             } else {
                 cell.classList.add('selected');
-                selectedCells.push({ row, col });
+                selectedCells.push({ row, col, letter: grid[row][col] });
             }
+            
             checkWord();
         }
 
         function checkWord() {
-            const selectedLetters = selectedCells.map(cell => grid[cell.row][cell.col]).join('');
-            const foundIndex = words.findIndex(word => word === selectedLetters);
-            if (foundIndex !== -1 && !foundWords.includes(selectedLetters)) {
+            const selectedLetters = selectedCells.map(c => c.letter).join('');
+            if (words.includes(selectedLetters)) {
                 foundWords.push(selectedLetters);
-                selectedCells.forEach(cell => {
-                    const cellDiv = document.querySelector(`.cell[data-row="${cell.row}"][data-col="${cell.col}"]`);
-                    cellDiv.classList.add('found');
+                markAsFound(selectedLetters);
+                selectedCells.forEach(c => {
+                    const cell = document.querySelector(`.cell[data-row="${c.row}"][data-col="${c.col}"]`);
+                    cell.classList.add('found');
                 });
-                document.getElementById(`word-${selectedLetters}`).classList.add('found-word');
-                checkAllWordsFound();
+                selectedCells = [];
             }
         }
 
-        function checkAllWordsFound() {
-            if (foundWords.length === words.length) {
-                const nextGameButton = document.createElement('button');
-                nextGameButton.textContent = 'Next Game';
-                nextGameButton.onclick = () => window.location.href = 'next_game.html';
-                document.body.appendChild(nextGameButton);
+        function markAsFound(word) {
+            const wordElement = document.getElementById(`word-${word}`);
+            if (wordElement) {
+                wordElement.classList.add('found-word');
             }
         }
 
