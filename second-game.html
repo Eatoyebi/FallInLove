@@ -1,107 +1,141 @@
-const words = ["LIMMY", "LOVE", "NIGERIA", "LIZARD", "MONKEYMAN", "FIREANDICE", "HUG", "VIAVITE", "CINCINNATI"];
-const gridSize = 15; // Increased grid size for longer words
-let grid = [];
-let foundWords = [];
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Quest - Word Search</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
 
-// Function to generate the word search grid
-function generateGrid() {
-    grid = Array.from({ length: gridSize }, () => Array(gridSize).fill(''));
+        h1 {
+            margin-bottom: 20px;
+        }
 
-    words.forEach(word => {
-        placeWord(word);
-    });
+        .word-search {
+            display: grid;
+            grid-template-columns: repeat(10, 40px); /* Adjust the number of columns */
+            grid-gap: 2px;
+            margin: 20px 0;
+        }
 
-    fillEmptySpaces();
-    displayGrid();
-}
+        .cell {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #e2e3e5;
+            border: 1px solid #ced4da;
+            font-weight: bold;
+        }
 
-// Function to place a word in the grid
-function placeWord(word) {
-    let placed = false;
+        .found {
+            background-color: #28a745; /* Color for found words */
+            color: white;
+        }
 
-    while (!placed) {
-        const direction = Math.floor(Math.random() * 2); // 0 = horizontal, 1 = vertical
-        const startX = Math.floor(Math.random() * gridSize);
-        const startY = Math.floor(Math.random() * gridSize);
+        .word-list {
+            list-style-type: none;
+            padding: 0;
+        }
 
-        if (canPlaceWord(word, startX, startY, direction)) {
-            for (let i = 0; i < word.length; i++) {
-                if (direction === 0) {
-                    grid[startY][startX + i] = word[i];
-                } else {
-                    grid[startY + i][startX] = word[i];
+        .word-list li {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Word Search Game!</h1>
+    <div id="wordSearch" class="word-search"></div>
+    <ul class="word-list">
+        <li>LIMMY</li>
+        <li>LOVE</li>
+        <li>NIGERIA</li>
+        <li>LIZARD</li>
+        <li>MONKEYMAN</li>
+        <li>FIREANDICE</li>
+        <li>HUG</li>
+        <li>VIAVITE</li>
+        <li>CINCINNATI</li>
+    </ul>
+    <button class="button" onclick="checkWords()">Check Answers</button>
+    
+    <script>
+        const words = ['LIMMY', 'LOVE', 'NIGERIA', 'LIZARD', 'MONKEYMAN', 'FIREANDICE', 'HUG', 'VIAVITE', 'CINCINNATI'];
+        const gridSize = 10; // Size of the word search grid
+        const grid = [];
+
+        // Initialize the grid with empty strings
+        for (let i = 0; i < gridSize; i++) {
+            grid[i] = new Array(gridSize).fill('');
+        }
+
+        function generateWordSearch() {
+            for (const word of words) {
+                placeWord(word);
+            }
+            renderGrid();
+        }
+
+        function placeWord(word) {
+            let placed = false;
+            while (!placed) {
+                const direction = Math.floor(Math.random() * 2); // 0: horizontal, 1: vertical
+                const row = Math.floor(Math.random() * gridSize);
+                const col = Math.floor(Math.random() * gridSize);
+
+                if (direction === 0 && col + word.length <= gridSize) { // Horizontal
+                    if (grid[row].slice(col, col + word.length).every(cell => cell === '')) {
+                        for (let i = 0; i < word.length; i++) {
+                            grid[row][col + i] = word[i];
+                        }
+                        placed = true;
+                    }
+                } else if (direction === 1 && row + word.length <= gridSize) { // Vertical
+                    if (grid.slice(row, row + word.length).every(row => row[col] === '')) {
+                        for (let i = 0; i < word.length; i++) {
+                            grid[row + i][col] = word[i];
+                        }
+                        placed = true;
+                    }
                 }
             }
-            placed = true;
         }
-    }
-}
 
-// Function to check if a word can be placed
-function canPlaceWord(word, startX, startY, direction) {
-    if (direction === 0) { // Horizontal
-        if (startX + word.length > gridSize) return false;
-        for (let i = 0; i < word.length; i++) {
-            if (grid[startY][startX + i] !== '') return false;
-        }
-    } else { // Vertical
-        if (startY + word.length > gridSize) return false;
-        for (let i = 0; i < word.length; i++) {
-            if (grid[startY + i][startX] !== '') return false;
-        }
-    }
-    return true;
-}
-
-// Function to fill empty spaces with random letters
-function fillEmptySpaces() {
-    for (let i = 0; i < gridSize; i++) {
-        for (let j = 0; j < gridSize; j++) {
-            if (grid[i][j] === '') {
-                grid[i][j] = String.fromCharCode(Math.floor(Math.random() * 26) + 65);
+        function renderGrid() {
+            const wordSearchDiv = document.getElementById('wordSearch');
+            wordSearchDiv.innerHTML = '';
+            for (let row of grid) {
+                for (let cell of row) {
+                    const cellDiv = document.createElement('div');
+                    cellDiv.className = 'cell';
+                    cellDiv.textContent = cell === '' ? String.fromCharCode(65 + Math.floor(Math.random() * 26)) : cell; // Fill with random letters
+                    wordSearchDiv.appendChild(cellDiv);
+                }
             }
         }
-    }
-}
 
-// Function to display the grid in the HTML
-function displayGrid() {
-    const wordSearchDiv = document.getElementById('word-search');
-    wordSearchDiv.innerHTML = '';
+        function checkWords() {
+            const cells = document.querySelectorAll('.cell');
+            cells.forEach(cell => {
+                if (words.includes(cell.textContent)) {
+                    cell.classList.add('found');
+                }
+            });
+            alert('Check the grid to see which words you found!');
+        }
 
-    grid.forEach(row => {
-        const rowDiv = document.createElement('div');
-        rowDiv.classList.add('grid-row');
-        row.forEach(cell => {
-            const cellDiv = document.createElement('span');
-            cellDiv.classList.add('grid-cell');
-            cellDiv.textContent = cell;
-            rowDiv.appendChild(cellDiv);
-        });
-        wordSearchDiv.appendChild(rowDiv);
-    });
-
-    displayWordList();
-}
-
-// Function to display the word list
-function displayWordList() {
-    const wordListDiv = document.getElementById('word-list');
-    wordListDiv.innerHTML = '';
-
-    words.forEach(word => {
-        const listItem = document.createElement('li');
-        listItem.textContent = word;
-        wordListDiv.appendChild(listItem);
-    });
-}
-
-// Function to check the answers
-function checkAnswers() {
-    const resultDiv = document.getElementById('result');
-    resultDiv.classList.remove('hidden');
-    resultDiv.textContent = "You found: " + foundWords.join(", ") || "No words found.";
-}
-
-// Start the game when the page loads
-window.onload = generateGrid;
+        // Generate the word search when the page loads
+        window.onload = generateWordSearch;
+    </script>
+</body>
+</html>

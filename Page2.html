@@ -5,6 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Love Quest</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+
+        .quiz-container {
+            text-align: center;
+        }
+
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #no-button {
+            position: relative;
+        }
+    </style>
+    <script>
+        function startQuiz() {
+            // Redirect to the word search game
+            window.location.href = 'second-game.html';
+        }
+
+        function moveNoButton() {
+            const noButton = document.getElementById('no-button');
+            const randomX = Math.floor(Math.random() * 300) - 150; // Random horizontal position
+            const randomY = Math.floor(Math.random() * 300) - 150; // Random vertical position
+            noButton.style.transform = `translate(${randomX}px, ${randomY}px)`; // Move button
+        }
+    </script>
 </head>
 <body>
     <div class="quiz-container">
@@ -14,6 +53,7 @@
             <button id="no-button" onmouseover="moveNoButton()">No</button>
             <h4>There's only one right answer.</h4>
         </div>
+    </div>
     
     <script src="script.js"></script>
 </body>
