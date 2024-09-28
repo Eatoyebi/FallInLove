@@ -6,24 +6,32 @@
     <title>Love Quest with Falling Leaves</title>
     <style>
         /* Fall-themed background color */
+        html, body {
+            height: 100%; /* Set height to fill the viewport */
+            margin: 0; /* Remove default margin */
+        }
+        
         body {
             font-family: Arial, sans-serif;
             background-color: #f9f1e3;
             color: #4e3b31;
             text-align: center;
             padding: 20px;
-            overflow: hidden; /* Hide overflow */
-            position: relative; /* Needed for absolute positioning of leaves */
-            height: 100vh; /* Full viewport height for centering */
-            display: flex; /* Use flexbox for centering */
+            overflow: hidden;
+        }
+    
+        #container {
+            display: flex; /* Use Flexbox */
             justify-content: center; /* Center horizontally */
             align-items: center; /* Center vertically */
+            flex-direction: column; /* Stack items vertically */
+            height: 100%; /* Fill the full height */
         }
-
+    
         h1 {
             color: #b65c39;
-            margin-bottom: 20px; /* Space between the question and buttons */
         }
+        
         button {
             background-color: #b65c39;
             color: white;
@@ -34,15 +42,16 @@
             cursor: pointer;
             margin: 10px;
             transition: background-color 0.3s ease;
-            position: relative; /* Allow positioning within its context */
         }
+        
         button:hover {
             background-color: #a55b34;
         }
+        
         #no-button {
-            position: absolute; /* Absolute positioning for movement */
+            position: relative;
         }
-
+    
         /* Falling leaves */
         .dot {
             width: 35px;
@@ -50,17 +59,15 @@
             position: absolute;
             background: url('http://www.clipartqueen.com/image-files/red-lobed-fall-clipart-leaf.png');
             background-size: 100% 100%;
+            animation: fall linear infinite;
         }
-
+    
         @keyframes fall {
             0% {
                 transform: translateY(-100px) rotate(0deg);
             }
-            100% {
-                transform: translateY(100vh) rotate(360deg);
-            }
         }
-    </style>
+    </style>    
 </head>
 <body>
     <div id="container">
