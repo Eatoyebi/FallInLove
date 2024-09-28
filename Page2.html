@@ -74,10 +74,18 @@
 
         function moveNoButton() {
             const noButton = document.getElementById('no-button');
-            const randomX = (Math.random() * 600) - 300; // Change range as needed
-            const randomY = (Math.random() * 600) - 300; // Change range as needed
-            const randomRotation = (Math.random() * 360);
-            noButton.style.transform = `translate(${randomX}px, ${randomY}px) rotate(${randomRotation}deg)`;
+            const container = document.getElementById("container");
+            const containerRect = container.getBoundingClientRect();
+            const buttonRect = noButton.getBoundingClientRect();
+
+            // Ensure "No" button stays within the visible area
+            const maxX = containerRect.width - buttonRect.width;
+            const maxY = containerRect.height - buttonRect.height - buttonRect.top; // Prevent going above question
+
+            const randomX = Math.random() * maxX; // Random X position within container
+            const randomY = Math.random() * maxY; // Random Y position
+
+            noButton.style.transform = `translate(${randomX}px, ${randomY}px)`;
             noButton.style.backgroundColor = getRandomColor();
         }
 
