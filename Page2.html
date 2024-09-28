@@ -13,7 +13,6 @@
             text-align: center;
             padding: 20px;
             overflow: hidden; /* Hide overflow */
-            position: relative; /* Needed for absolute positioning of leaves */
             height: 100vh; /* Full viewport height for centering */
             display: flex; /* Use flexbox for centering */
             flex-direction: column; /* Stack elements vertically */
@@ -25,6 +24,7 @@
             color: #b65c39;
             margin-bottom: 20px; /* Space between the question and buttons */
         }
+
         button {
             background-color: #b65c39;
             color: white;
@@ -37,11 +37,9 @@
             transition: background-color 0.3s ease;
             position: relative; /* Allow positioning within its context */
         }
+
         button:hover {
             background-color: #a55b34;
-        }
-        #no-button {
-            position: absolute; /* Absolute positioning for movement */
         }
 
         /* Falling leaves */
@@ -56,22 +54,20 @@
 
         @keyframes fall {
             0% {
-                transform: translateY(-100px) rotate(0deg);
+                transform: translateY(-100px); /* Start above the viewport */
             }
             100% {
-                transform: translateY(100vh) rotate(360deg);
+                transform: translateY(100vh); /* End at the bottom of the viewport */
             }
         }
     </style>
 </head>
 <body>
     <div id="container">
-        <div id="opening-screen">
-            <h1>Do you love me?</h1>
-            <button id="yes-button" onclick="startQuiz()">Yes</button>
-            <button id="no-button" onmouseover="moveNoButton()">No</button>
-            <h4>There's only one right answer.</h4>
-        </div>
+        <h1>Do you love me?</h1>
+        <button id="yes-button" onclick="startQuiz()">Yes</button>
+        <button id="no-button" onmouseover="moveNoButton()">No</button>
+        <h4>There's only one right answer.</h4>
     </div>
 
     <script>
@@ -91,8 +87,8 @@
             const maxY = containerRect.height - buttonRect.height - 100; // Ensure it stays below the question
 
             // Generate random positions within the limits
-            const randomX = Math.random() * maxX; // Random X position
-            const randomY = Math.random() * maxY; // Random Y position
+            const randomX = Math.random() * maxX * 0.9; // Random X position
+            const randomY = Math.random() * maxY * 0.8; // Random Y position
 
             noButton.style.transform = `translate(${randomX}px, ${randomY}px)`;
             noButton.style.backgroundColor = getRandomColor();
@@ -108,18 +104,17 @@
         }
 
         // Falling leaves functionality
-        var totalLeaves = 30; // Total number of leaves
-        var container = document.getElementById("container");
-        var w = window.innerWidth;
-        var h = window.innerHeight;
+        const totalLeaves = 30; // Total number of leaves
+        const container = document.getElementById("container");
+        const w = window.innerWidth;
 
-        for (var i = 0; i < totalLeaves; i++) {
-            var leaf = document.createElement('div');
+        for (let i = 0; i < totalLeaves; i++) {
+            const leaf = document.createElement('div');
             leaf.classList.add('dot');
             // Set initial position and animation
             leaf.style.left = Math.random() * w + 'px'; // Random X position
             leaf.style.top = Math.random() * -100 + 'px'; // Start above the viewport
-            leaf.style.animation = `fall ${Math.random() * 3 + 2}s linear infinite`; // Random duration for fall
+            leaf.style.animationDuration = `${Math.random() * 3 + 2}s`; // Random duration for fall
             container.appendChild(leaf);
         }
     </script>
