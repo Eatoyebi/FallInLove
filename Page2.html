@@ -6,7 +6,53 @@
     <title>Love Quest</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        /* Include CSS styles directly or link to your styles.css file */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f1e3; /* Light background for fall theme */
+            color: #4e3b31; /* Dark brown color for text */
+            text-align: center; /* Centering text */
+            padding: 20px;
+            overflow: hidden; /* Prevent scrollbars */
+        }
+        h1 {
+            color: #b65c39; /* Warm orange for headings */
+        }
+        button {
+            background-color: #b65c39; /* Button color */
+            color: white; /* Button text color */
+            border: none;
+            border-radius: 5px; /* Rounded corners */
+            padding: 10px 20px; /* Button padding */
+            font-size: 16px; /* Font size for button */
+            cursor: pointer; /* Pointer cursor on hover */
+            margin: 10px; /* Margin for spacing */
+            transition: background-color 0.3s ease; /* Transition effect */
+        }
+        button:hover {
+            background-color: #a55b34; /* Darker orange on hover */
+        }
+        #no-button {
+            position: relative; /* For moving effect */
+        }
+        .leaf {
+            position: absolute;
+            top: -10%; /* Start above the viewport */
+            width: 30px; /* Adjust leaf size */
+            height: 30px; /* Adjust leaf size */
+            background-image: url('path/to/leaf.png'); /* Replace with actual leaf image path */
+            background-size: cover; /* Ensure image covers div */
+            opacity: 0.8; /* Slightly transparent leaves */
+            animation: fall linear infinite; /* Apply falling animation */
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(0); /* Start from the top */
+            }
+            100% {
+                transform: translateY(100vh); /* Fall to the bottom of the viewport */
+            }
+        }
     </style>
     <script>
         function startQuiz() {
