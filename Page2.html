@@ -25,11 +25,11 @@
             padding: 10px 20px;
             font-size: 16px;
             cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s; /* Smooth transition */
         }
 
         #no-button {
             position: relative;
-            transition: transform 0.3s ease; /* Smooth movement */
         }
     </style>
     <script>
@@ -40,10 +40,22 @@
 
         function moveNoButton() {
             const noButton = document.getElementById('no-button');
-            // Get random values to move the button more significantly
-            const randomX = (Math.random() * 400) - 200; // Move horizontally between -200px and +200px
-            const randomY = (Math.random() * 400) - 200; // Move vertically between -200px and +200px
-            noButton.style.transform = `translate(${randomX}px, ${randomY}px)`; // Move button
+            // Get random values to move the button dramatically
+            const randomX = (Math.random() * 600) - 300; // Move horizontally between -300px and +300px
+            const randomY = (Math.random() * 600) - 300; // Move vertically between -300px and +300px
+            const randomRotation = (Math.random() * 360); // Random rotation
+
+            noButton.style.transform = `translate(${randomX}px, ${randomY}px) rotate(${randomRotation}deg)`; // Move and rotate button
+            noButton.style.backgroundColor = getRandomColor(); // Change button color dramatically
+        }
+
+        function getRandomColor() {
+            const letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
         }
     </script>
 </head>
