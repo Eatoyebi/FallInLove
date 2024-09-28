@@ -103,6 +103,6 @@ input[type="password"] {
     font-weight: bold; /* Bold for emphasis */
 }
 .gif-small {
-    max-width: 300px; /* Adjust as needed */
+    max-width: 150px; /* Adjust as needed */
     margin: 20px auto; /* Center the GIF */
 }
