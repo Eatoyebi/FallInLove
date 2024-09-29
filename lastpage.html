@@ -15,8 +15,6 @@
             box-sizing: border-box;
             line-height: 1.6;
             overflow-x: hidden; /* Prevent horizontal overflow */
-            height: 100vh; /* Set the body height */
-            overflow-y: auto; /* Enable vertical scrolling */
         }
         h1 {
             text-align: center;
@@ -34,8 +32,6 @@
             border-radius: 15px; /* More rounded corners */
             padding: 40px; /* More padding for breathing room */
             box-shadow: 0 6px 30px rgba(0, 0, 0, 0.1); /* Enhanced shadow for depth */
-            height: 80vh; /* Set a fixed height */
-            overflow-y: auto; /* Enable vertical scrolling within the content */
         }
         .paragraph {
             font-size: 1.2rem; /* Font size for readability */
@@ -84,7 +80,7 @@
             width: 30px;
             height: 30px;
             background-color: red;
-            clip-path: polygon(50% 0%, 100% 100%, 0% 100%); /* This was for triangles; will be updated */
+            clip-path: polygon(50% 0%, 100% 100%, 0% 100%); /* Heart shape */
             opacity: 0;
             pointer-events: none; /* Prevent interaction */
             transform: rotate(45deg); /* Rotate to create heart shape */
@@ -153,10 +149,10 @@
                     heart.style.opacity = 0; // Fade out
                 }, 100); // Delay to start the animation
                 
-                // Remove heart after animation
+                // Remove heart after lingering for 3-5 seconds
                 setTimeout(() => {
                     heart.remove();
-                }, 4100); // Remove after animation completes
+                }, 3500); // Keep heart for 3.5 seconds
             }
         }
     </script>
