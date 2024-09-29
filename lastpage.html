@@ -22,7 +22,7 @@
             text-align: center;
             color: #5b3d00;
             font-size: 2.5rem;
-            margin-top: 20px; /* Adding space from the top */
+            margin-top: 20px;
             margin-bottom: 20px;
         }
 
@@ -59,21 +59,23 @@
             margin-top: 40px;
         }
 
-        /* Button Styling */
+        /* Cute Button Styling */
         button {
             color: #5b3d00;
-            background-color: white;
-            border: 2px solid #5b3d00;
+            background: linear-gradient(135deg, #ffc4a3, #ff8e72);
+            border: none;
+            border-radius: 30px;
+            padding: 12px 30px;
+            font-size: 1.4rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
             cursor: pointer;
-            padding: 10px 20px;
-            transition-duration: .5s;
-            font-size: 1.5rem;
         }
 
         button:hover {
-            color: white;
-            background-color: red;
-            transform: scale(1.1);
+            background: linear-gradient(135deg, #ff8e72, #ffc4a3);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+            transform: scale(1.05);
         }
 
         /* Footer Styling */
@@ -94,12 +96,12 @@
         /* Ensure full page scrolling */
         html, body {
             height: auto;
-            overflow-x: hidden; /* Prevent horizontal scroll */
+            overflow-x: hidden;
         }
 
         /* Make sure everything is properly contained */
         .container {
-            min-height: 100vh; /* Makes sure the container stretches full height of viewport */
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
         }
