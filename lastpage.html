@@ -6,6 +6,7 @@
     <title>Our Love Story - Last Page</title>
     <link rel="stylesheet" href="styles.css">
     <style>
+        /* General Page Styling */
         body {
             background-color: #ffefdb;
             font-family: Arial, sans-serif;
@@ -15,12 +16,17 @@
             box-sizing: border-box;
             line-height: 1.6;
         }
+
+        /* Headline */
         h1 {
             text-align: center;
             color: #5b3d00;
             font-size: 2.5rem;
+            margin-top: 20px; /* Adding space from the top */
             margin-bottom: 20px;
         }
+
+        /* Content Container */
         .content {
             text-align: center;
             margin: 20px auto;
@@ -30,22 +36,30 @@
             padding: 30px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
+
+        /* Paragraph Styling */
         p {
             font-size: 1.2rem;
             margin-bottom: 20px;
         }
+
+        /* Question Styling */
         h2 {
             font-size: 1.8rem;
             color: #c49a3d;
             margin-top: 30px;
             font-weight: bold;
         }
+
+        /* Button Container */
         .button-container {
             display: flex;
             justify-content: center;
             gap: 20px;
             margin-top: 40px;
         }
+
+        /* Button Styling */
         button {
             color: red;
             background-color: white;
@@ -55,65 +69,82 @@
             transition-duration: .5s;
             font-size: 1.5rem;
         }
+
         button:hover {
             color: white;
             background-color: red;
             transform: scale(1.1);
         }
+
+        /* Footer Styling */
         footer {
             text-align: center;
             margin-top: 60px;
             font-size: 0.9rem;
             color: #7a4b2a;
         }
+
+        /* Gif Container */
         .gif-container {
             display: flex;
             justify-content: center;
             margin-top: 20px;
         }
-        /* Add this to ensure the body height is 100% and allow scrolling */
+
+        /* Ensure full page scrolling */
         html, body {
-            height: 100%;
+            height: auto;
+            overflow-x: hidden; /* Prevent horizontal scroll */
         }
+
+        /* Make sure everything is properly contained */
+        .container {
+            min-height: 100vh; /* Makes sure the container stretches full height of viewport */
+            display: flex;
+            flex-direction: column;
+        }
+
     </style>
 </head>
 <body>
-    <h1>A Journey of Us</h1>
-    
-    <div class="content">
-        <p>
-            Our love story is a beautiful adventure, woven with laughter, tenderness, and shared moments that make my heart smile. From the first time we met, there was an undeniable connection, a spark that ignited a journey I never knew I wanted.
-        </p>
-        <p>
-            With each memory we've created together—those unforgettable nights filled with laughter and those quiet moments when words were unnecessary—I've come to cherish not only the time we spend together but also the incredible person you are.
-        </p>
-        <p>
-            You bring joy and warmth to my life, and every day spent with you feels like a new page in our story. I can’t help but look forward to the countless adventures that lie ahead of us.
-        </p>
-        <p>
-            So, here we are, at this exciting juncture, and I have a question that’s been on my mind:
-        </p>
-        <h2>Would you like to continue this journey together? May I be your girlfriend?</h2>
+    <div class="container">
+        <h1>A Journey of Us</h1>
         
-        <div class="button-container">
-            <a href="Pleaseleave.html">
-                <button>No</button>
-            </a>
-            <button id="yes-button">Yes</button>
+        <div class="content">
+            <p>
+                Our love story is a beautiful adventure, woven with laughter, tenderness, and shared moments that make my heart smile. From the first time we met, there was an undeniable connection, a spark that ignited a journey I never knew I wanted.
+            </p>
+            <p>
+                With each memory we've created together—those unforgettable nights filled with laughter and those quiet moments when words were unnecessary—I've come to cherish not only the time we spend together but also the incredible person you are.
+            </p>
+            <p>
+                You bring joy and warmth to my life, and every day spent with you feels like a new page in our story. I can’t help but look forward to the countless adventures that lie ahead of us.
+            </p>
+            <p>
+                So, here we are, at this exciting juncture, and I have a question that’s been on my mind:
+            </p>
+            <h2>Would you like to continue this journey together? May I be your girlfriend?</h2>
+            
+            <div class="button-container">
+                <a href="Pleaseleave.html">
+                    <button>No</button>
+                </a>
+                <button id="yes-button">Yes</button>
+            </div>
+
+            <div class="gif-container">
+                <div class="tenor-gif-embed" data-postid="7355347396987361923" data-share-method="host" data-aspect-ratio="1.23333" data-width="100%">
+                    <a href="https://tenor.com/view/mocha-bear-hearts-mocha-and-milk-bears-milk-mocha-bear-gif-love-gif-7355347396987361923">Mocha Bear Hearts Sticker</a>
+                    from <a href="https://tenor.com/search/mocha+bear-stickers">Mocha Bear Stickers</a>
+                </div>
+                <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+            </div>
         </div>
 
-        <div class="gif-container">
-            <div class="tenor-gif-embed" data-postid="7355347396987361923" data-share-method="host" data-aspect-ratio="1.23333" data-width="100%">
-                <a href="https://tenor.com/view/mocha-bear-hearts-mocha-and-milk-bears-milk-mocha-bear-gif-love-gif-7355347396987361923">Mocha Bear Hearts Sticker</a>
-                from <a href="https://tenor.com/search/mocha+bear-stickers">Mocha Bear Stickers</a>
-            </div>
-            <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
-        </div>
+        <footer>
+            &copy; 2024 Our Love Story
+        </footer>
     </div>
-    
-    <footer>
-        &copy; 2024 Our Love Story
-    </footer>
 
     <script>
         document.getElementById('yes-button').addEventListener('click', function() {
