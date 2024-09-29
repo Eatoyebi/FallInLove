@@ -11,75 +11,81 @@
             font-family: Arial, sans-serif;
             color: #5b3d00;
             margin: 0;
-            padding: 40px 20px 20px; /* Increased top padding for visibility */
+            padding: 40px 20px;
             box-sizing: border-box;
-            overflow: auto; /* Prevent overflow */
+            overflow: auto;
         }
         h1 {
             text-align: center;
             color: #5b3d00;
         }
+        .memory-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* Three columns */
+            gap: 20px; /* Space between grid items */
+        }
         .memory {
             border: 1px solid #c49a3d;
             border-radius: 8px;
             padding: 15px;
-            margin: 30px 0; /* Space between memories */
             background-color: #fdf2e9;
             text-align: center;
         }
         img {
-            max-width: 300px; /* Further reduced width for better visibility */
+            max-width: 100%; /* Responsive image size */
             height: auto;
             border-radius: 8px;
-            margin-bottom: 10px; /* Added margin below images */
+            margin-bottom: 10px;
         }
         h2 {
             margin: 10px 0;
-            font-size: 1.5rem;
+            font-size: 1.2rem; /* Adjusted font size for headers */
             color: #5b3d00;
         }
         p {
-            font-size: 1.1rem;
+            font-size: 1rem; /* Adjusted font size for paragraphs */
         }
     </style>
 </head>
 <body>
     <h1>Memory Lane</h1>
     
-    <div class="memory">
-        <img src="pic1.jpeg" alt="Picture of Him" />
-        <h2>March 22, 2024</h2>
-        <p>The day of the probate marked the enchanting beginning of our story. After the show, this dashing man enveloped me in a hug that felt like a warm embrace from the universe, filling a void I hadn’t realized I’d been yearning for.</p>
-    </div>
+    <div class="memory-container">
+        <div class="memory">
+            <img src="pic1.jpeg" alt="Picture of Him" />
+            <h2>March 22, 2024</h2>
+            <p>The day of the probate marked the enchanting beginning of our story. After the show, this dashing man enveloped me in a hug that felt like a warm embrace from the universe, filling a void I hadn’t realized I’d been yearning for.</p>
+        </div>
 
-    <div class="memory">
-        <img src="pic 2.jpeg" alt="Picture of Us" />
-        <h2>April 8, 2024</h2>
-        <p>Our first public outing unfolded under the mesmerizing glow of a solar eclipse. While I wanted to capture the celestial wonder, nothing could overshadow the precious moment shared between us—a beautiful promise of what was blossoming.</p>
-    </div>
+        <div class="memory">
+            <img src="pic 2.jpeg" alt="Picture of Us" />
+            <h2>April 8, 2024</h2>
+            <p>Our first public outing unfolded under the mesmerizing glow of a solar eclipse. While I wanted to capture the celestial wonder, nothing could overshadow the precious moment shared between us—a beautiful promise of what was blossoming.</p>
+        </div>
 
-    <div class="memory">
-        <img src="IMG_3092.jpeg" alt="Picture of Us" />
-        <h2>April 13, 2024</h2>
-        <p>At the Sigma Sigma banquet, we shimmered like stars in the night sky, adorned in our stunning purple attire. My heart danced with butterflies as you whispered those magical words, “I love you,” making that evening truly unforgettable.</p>
-    </div>
+        <div class="memory">
+            <img src="IMG_3092.jpeg" alt="Picture of Us" />
+            <h2>April 13, 2024</h2>
+            <p>At the Sigma Sigma banquet, we shimmered like stars in the night sky, adorned in our stunning purple attire. My heart danced with butterflies as you whispered those magical words, “I love you,” making that evening truly unforgettable.</p>
+        </div>
 
-    <div class="memory">
-        <img src="4.jpeg" alt="Picture of the Four of Us" />
-        <h2>May 17, 2024</h2>
-        <p>A celebration of friendship at Sophie’s birthday kickback brought laughter and joy. As the night unfolded, I indulged a little too much, but you, my charming prince, looked after me with such care, making me feel cherished and safe.</p>
-    </div>
+        <div class="memory">
+            <img src="4.jpeg" alt="Picture of the Four of Us" />
+            <h2>May 17, 2024</h2>
+            <p>A celebration of friendship at Sophie’s birthday kickback brought laughter and joy. As the night unfolded, I indulged a little too much, but you, my charming prince, looked after me with such care, making me feel cherished and safe.</p>
+        </div>
 
-    <div class="memory">
-        <img src="5.jpeg" alt="Picture of Him" />
-        <h2>August 17, 2024</h2>
-        <p>You returned home from co-op, a day filled with joy and laughter. You arrived like a radiant spirit, a testament to the journey of an African immigrant coming to America, and my heart swelled with happiness. I miss you dearly, just like I do now, though the distance feels less daunting with memories like this.</p>
-    </div>
+        <div class="memory">
+            <img src="5.jpeg" alt="Picture of Him" />
+            <h2>August 17, 2024</h2>
+            <p>You returned home from co-op, a day filled with joy and laughter. You arrived like a radiant spirit, a testament to the journey of an African immigrant coming to America, and my heart swelled with happiness. I miss you dearly, just like I do now, though the distance feels less daunting with memories like this.</p>
+        </div>
 
-    <div class="memory">
-        <img src="IMG_4949.jpeg" alt="Picture of Us" />
-        <h2>September 21, 2024</h2>
-        <p>We created one of our most cherished memories during a delightful dinner date filled with warmth and sweetness. Doesn’t our laughter echo in the air? I can’t wait to weave even more beautiful moments into our tapestry of love.</p>
+        <div class="memory">
+            <img src="IMG_4949.jpeg" alt="Picture of Us" />
+            <h2>September 21, 2024</h2>
+            <p>We created one of our most cherished memories during a delightful dinner date filled with warmth and sweetness. Doesn’t our laughter echo in the air? I can’t wait to weave even more beautiful moments into our tapestry of love.</p>
+        </div>
     </div>
 </body>
 </html>
