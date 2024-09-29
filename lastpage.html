@@ -15,6 +15,8 @@
             box-sizing: border-box;
             line-height: 1.6;
             overflow-x: hidden; /* Prevent horizontal overflow */
+            height: 100vh; /* Set the body height */
+            overflow-y: auto; /* Enable vertical scrolling */
         }
         h1 {
             text-align: center;
@@ -32,6 +34,8 @@
             border-radius: 15px; /* More rounded corners */
             padding: 40px; /* More padding for breathing room */
             box-shadow: 0 6px 30px rgba(0, 0, 0, 0.1); /* Enhanced shadow for depth */
+            height: 80vh; /* Set a fixed height */
+            overflow-y: auto; /* Enable vertical scrolling within the content */
         }
         .paragraph {
             font-size: 1.2rem; /* Font size for readability */
@@ -80,9 +84,28 @@
             width: 30px;
             height: 30px;
             background-color: red;
-            clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+            clip-path: polygon(50% 0%, 100% 100%, 0% 100%); /* This was for triangles; will be updated */
             opacity: 0;
             pointer-events: none; /* Prevent interaction */
+            transform: rotate(45deg); /* Rotate to create heart shape */
+            transition: transform 0.5s ease;
+        }
+        .heart:before,
+        .heart:after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-color: red;
+            border-radius: 50%; /* Create the rounded top of the heart */
+        }
+        .heart:before {
+            top: -15px; /* Position the left round part */
+            left: 0;
+        }
+        .heart:after {
+            top: -15px; /* Position the right round part */
+            left: 15px; /* Move right for the right round part */
         }
     </style>
 </head>
@@ -126,7 +149,7 @@
                 
                 // Animate the heart
                 setTimeout(() => {
-                    heart.style.transform = 'translateY(-100vh)'; // Move up
+                    heart.style.transform = 'translateY(-100vh) scale(0)'; // Move up and shrink
                     heart.style.opacity = 0; // Fade out
                 }, 100); // Delay to start the animation
                 
