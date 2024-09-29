@@ -14,7 +14,8 @@
             padding: 20px;
             box-sizing: border-box;
             line-height: 1.6;
-            overflow: auto; /* Make entire page scrollable */
+            overflow-y: auto; /* Enable vertical scrolling */
+            min-height: 100vh; /* Ensure the body takes up at least full viewport height */
         }
         h1 {
             text-align: center;
@@ -61,13 +62,46 @@
         button:hover {
             color: white;
             background-color: red;
-            transform: scale(2);
+            transform: scale(1.1);
+        }
+        .heart {
+            width: 60px;
+            height: 60px;
+            background-color: red;
+            position: relative;
+            display: inline-block;
+            margin-top: 20px;
+            border-radius: 50px 50px 0 0; /* Top corners rounded */
+            transform: rotate(-45deg);
+            transition: transform 0.5s;
+        }
+        .heart::before,
+        .heart::after {
+            content: "";
+            width: 60px;
+            height: 60px;
+            background-color: red;
+            border-radius: 50%;
+            position: absolute;
+        }
+        .heart::before {
+            top: -30px;
+            left: 0;
+        }
+        .heart::after {
+            left: 30px;
+            top: 0;
         }
         footer {
             text-align: center;
             margin-top: 60px;
             font-size: 0.9rem;
             color: #7a4b2a;
+        }
+        .gif-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -95,9 +129,17 @@
             </a>
             <button id="yes-button">Yes</button>
         </div>
-        
-        <div id="heart-button" style="display:none; text-align:center;">
-            <button>Heart</button>
+
+        <div class="heart-container" style="display: none;">
+            <div class="heart"></div>
+        </div>
+
+        <div class="gif-container">
+            <div class="tenor-gif-embed" data-postid="7355347396987361923" data-share-method="host" data-aspect-ratio="1.23333" data-width="100%">
+                <a href="https://tenor.com/view/mocha-bear-hearts-mocha-and-milk-bears-milk-mocha-bear-gif-love-gif-7355347396987361923">Mocha Bear Hearts Sticker</a>
+                from <a href="https://tenor.com/search/mocha+bear-stickers">Mocha Bear Stickers</a>
+            </div>
+            <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
         </div>
     </div>
     
@@ -107,7 +149,10 @@
 
     <script>
         document.getElementById('yes-button').addEventListener('click', function() {
-            document.getElementById('heart-button').style.display = 'block'; // Show the heart button
+            // Hide the button and show the heart
+            this.style.display = 'none';
+            const heartContainer = document.querySelector('.heart-container');
+            heartContainer.style.display = 'block';
         });
     </script>
 </body>
