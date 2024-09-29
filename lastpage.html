@@ -7,101 +7,67 @@
     <link rel="stylesheet" href="styles.css">
     <style>
         body {
-            background-color: #ffefdb; /* Light background for warmth */
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Softer font choice */
-            color: #5b3d00; /* Deep green for text */
+            background-color: #ffefdb;
+            font-family: Arial, sans-serif;
+            color: #5b3d00;
             margin: 0;
-            padding: 20px; /* Added padding to ensure top content is visible */
+            padding: 20px;
             box-sizing: border-box;
             line-height: 1.6;
-            overflow-x: hidden; /* Prevent horizontal overflow */
+            overflow: auto; /* Make entire page scrollable */
         }
         h1 {
             text-align: center;
             color: #5b3d00;
-            font-size: 3rem; /* Increased font size for emphasis */
+            font-size: 2.5rem;
             margin-bottom: 20px;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-            letter-spacing: 1px; /* Slightly increased letter spacing */
         }
         .content {
             text-align: center;
             margin: 20px auto;
             max-width: 800px;
-            background-color: #fdf2e9; /* Soft background for content */
-            border-radius: 15px; /* More rounded corners */
-            padding: 40px; /* More padding for breathing room */
-            box-shadow: 0 6px 30px rgba(0, 0, 0, 0.1); /* Enhanced shadow for depth */
+            background-color: #fdf2e9;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
-        .paragraph {
-            font-size: 1.2rem; /* Font size for readability */
+        p {
+            font-size: 1.2rem;
             margin-bottom: 20px;
-            padding: 15px; /* More padding for comfort */
-            border-radius: 5px; /* Rounded corners for paragraphs */
-            background-color: #ffffff; /* White background for contrast */
-            transition: transform 0.3s; /* Add transition for hover effect */
-        }
-        .paragraph:hover {
-            transform: scale(1.02); /* Slightly enlarge on hover */
         }
         h2 {
-            font-size: 2rem; /* Larger heading */
-            color: #c49a3d; /* Gold accent for the question */
+            font-size: 1.8rem;
+            color: #c49a3d;
             margin-top: 30px;
             font-weight: bold;
-            letter-spacing: 0.5px; /* Adjusted spacing */
+            text-decoration: none; /* Removed underline */
         }
-        .button {
-            display: inline-block;
-            padding: 15px 30px; /* Increased padding for comfort */
-            background-color: #c49a3d; /* Button color */
-            color: white; /* Button text color */
-            text-decoration: none; /* No underline */
-            border-radius: 8px; /* Rounded corners */
-            font-size: 1.5rem; /* Font size */
-            transition: background-color 0.3s ease, transform 0.3s; /* Smooth transitions */
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px; /* Space between buttons */
             margin-top: 40px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Shadow for button */
         }
-        .button:hover {
-            background-color: #5b3d00; /* Darker green on hover */
-            transform: translateY(-3px); /* Lift effect on hover */
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3); /* Enhanced shadow */
+        button { 
+            color: red;
+            background-color: white;
+            border: 2px solid red;
+            cursor: pointer;
+            padding: 10px;
+            transition-duration: .5s;
+            font-size: 1.5rem; /* Increased font size */
+        }
+        button:hover {
+            color: white;
+            background-color: red;
+            transform: scale(2);
         }
         footer {
             text-align: center;
             margin-top: 60px;
             font-size: 0.9rem;
-            color: #7a4b2a; /* Subtle footer color */
-            opacity: 0.8; /* Slight transparency */
-        }
-        .heart {
-            position: absolute;
-            width: 30px;
-            height: 30px;
-            background-color: red;
-            clip-path: polygon(50% 0%, 100% 100%, 0% 100%); /* Heart shape */
-            opacity: 0;
-            pointer-events: none; /* Prevent interaction */
-            transform: rotate(45deg); /* Rotate to create heart shape */
-            transition: transform 0.5s ease;
-        }
-        .heart:before,
-        .heart:after {
-            content: '';
-            position: absolute;
-            width: 30px;
-            height: 30px;
-            background-color: red;
-            border-radius: 50%; /* Create the rounded top of the heart */
-        }
-        .heart:before {
-            top: -15px; /* Position the left round part */
-            left: 0;
-        }
-        .heart:after {
-            top: -15px; /* Position the right round part */
-            left: 15px; /* Move right for the right round part */
+            color: #7a4b2a;
         }
     </style>
 </head>
@@ -109,19 +75,30 @@
     <h1>A Journey of Us</h1>
     
     <div class="content">
-        <div class="paragraph">
-            Our love story is a beautiful adventure, woven with laughter, tenderness, and shared moments that make my heart smile. From the first time we met, there was an undeniable connection, a spark that ignited a journey I never knew I wanted. With each memory we've created together—those unforgettable nights filled with laughter and those quiet moments when words were unnecessary—I've come to cherish not only the time we spend together but also the incredible person you are. You bring joy and warmth to my life, and every day spent with you feels like a new page in our story. I can’t help but look forward to the countless adventures that lie ahead of us. So, here we are, at this exciting juncture, and I have a question that’s been on my mind:
-        </div>
+        <p>
+            Our love story is a beautiful adventure, woven with laughter, tenderness, and shared moments that make my heart smile. From the first time we met, there was an undeniable connection, a spark that ignited a journey I never knew I wanted.
+        </p>
+        <p>
+            With each memory we've created together—those unforgettable nights filled with laughter and those quiet moments when words were unnecessary—I've come to cherish not only the time we spend together but also the incredible person you are.
+        </p>
+        <p>
+            You bring joy and warmth to my life, and every day spent with you feels like a new page in our story. I can’t help but look forward to the countless adventures that lie ahead of us.
+        </p>
+        <p>
+            So, here we are, at this exciting juncture, and I have a question that’s been on my mind:
+        </p>
         <h2>Would you like to continue this journey together? May I be your girlfriend?</h2>
-        <a href="#" class="button" id="yesButton">Yes, of course!</a>
-        <a href="Pleaseleave.html" class="button" id="noButton">No, thank you.</a>
-
-        <!-- Tenor GIF Embed -->
-        <div class="tenor-gif-embed" data-postid="7355347396987361923" data-share-method="host" data-aspect-ratio="1.23333" data-width="100%">
-            <a href="https://tenor.com/view/mocha-bear-hearts-mocha-and-milk-bears-milk-mocha-bear-gif-love-gif-7355347396987361923">Mocha Bear Hearts Sticker</a> from 
-            <a href="https://tenor.com/search/mocha+bear-stickers">Mocha Bear Stickers</a>
+        
+        <div class="button-container">
+            <a href="Pleaseleave.html">
+                <button>No</button>
+            </a>
+            <button id="yes-button">Yes</button>
         </div>
-        <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+        
+        <div id="heart-button" style="display:none; text-align:center;">
+            <button>Heart</button>
+        </div>
     </div>
     
     <footer>
@@ -129,32 +106,9 @@
     </footer>
 
     <script>
-        document.getElementById('yesButton').addEventListener('click', function(event) {
-            event.preventDefault(); // Prevent default anchor behavior
-            createHearts();
+        document.getElementById('yes-button').addEventListener('click', function() {
+            document.getElementById('heart-button').style.display = 'block'; // Show the heart button
         });
-
-        function createHearts() {
-            for (let i = 0; i < 10; i++) {
-                const heart = document.createElement('div');
-                heart.className = 'heart';
-                heart.style.left = Math.random() * 100 + 'vw'; // Random horizontal position
-                heart.style.animationDuration = Math.random() * 2 + 3 + 's'; // Random duration
-                heart.style.opacity = 1; // Start visible
-                document.body.appendChild(heart);
-                
-                // Animate the heart
-                setTimeout(() => {
-                    heart.style.transform = 'translateY(-100vh) scale(0)'; // Move up and shrink
-                    heart.style.opacity = 0; // Fade out
-                }, 100); // Delay to start the animation
-                
-                // Remove heart after lingering for 3-5 seconds
-                setTimeout(() => {
-                    heart.remove();
-                }, 3500); // Keep heart for 3.5 seconds
-            }
-        }
     </script>
 </body>
 </html>
