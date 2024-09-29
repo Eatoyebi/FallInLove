@@ -75,6 +75,15 @@
             color: #7a4b2a; /* Subtle footer color */
             opacity: 0.8; /* Slight transparency */
         }
+        .heart {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-color: red;
+            clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+            opacity: 0;
+            pointer-events: none; /* Prevent interaction */
+        }
     </style>
 </head>
 <body>
@@ -82,19 +91,11 @@
     
     <div class="content">
         <div class="paragraph">
-            Our love story is a beautiful adventure, woven with laughter, tenderness, and shared moments that make my heart smile. From the first time we met, there was an undeniable connection, a spark that ignited a journey I never knew I wanted.
-        </div>
-        <div class="paragraph">
-            With each memory we've created together—those unforgettable nights filled with laughter and those quiet moments when words were unnecessary—I've come to cherish not only the time we spend together but also the incredible person you are.
-        </div>
-        <div class="paragraph">
-            You bring joy and warmth to my life, and every day spent with you feels like a new page in our story. I can’t help but look forward to the countless adventures that lie ahead of us.
-        </div>
-        <div class="paragraph">
-            So, here we are, at this exciting juncture, and I have a question that’s been on my mind:
+            Our love story is a beautiful adventure, woven with laughter, tenderness, and shared moments that make my heart smile. From the first time we met, there was an undeniable connection, a spark that ignited a journey I never knew I wanted. With each memory we've created together—those unforgettable nights filled with laughter and those quiet moments when words were unnecessary—I've come to cherish not only the time we spend together but also the incredible person you are. You bring joy and warmth to my life, and every day spent with you feels like a new page in our story. I can’t help but look forward to the countless adventures that lie ahead of us. So, here we are, at this exciting juncture, and I have a question that’s been on my mind:
         </div>
         <h2>Would you like to continue this journey together? May I be your girlfriend?</h2>
-        <a href="#" class="button">Yes, of course!</a> <!-- Add a button for interactivity -->
+        <a href="#" class="button" id="yesButton">Yes, of course!</a>
+        <a href="#" class="button" id="noButton">No, thank you.</a>
 
         <!-- Tenor GIF Embed -->
         <div class="tenor-gif-embed" data-postid="7355347396987361923" data-share-method="host" data-aspect-ratio="1.23333" data-width="100%">
@@ -107,5 +108,34 @@
     <footer>
         &copy; 2024 Our Love Story
     </footer>
+
+    <script>
+        document.getElementById('yesButton').addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent default anchor behavior
+            createHearts();
+        });
+
+        function createHearts() {
+            for (let i = 0; i < 10; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.style.left = Math.random() * 100 + 'vw'; // Random horizontal position
+                heart.style.animationDuration = Math.random() * 2 + 3 + 's'; // Random duration
+                heart.style.opacity = 1; // Start visible
+                document.body.appendChild(heart);
+                
+                // Animate the heart
+                setTimeout(() => {
+                    heart.style.transform = 'translateY(-100vh)'; // Move up
+                    heart.style.opacity = 0; // Fade out
+                }, 100); // Delay to start the animation
+                
+                // Remove heart after animation
+                setTimeout(() => {
+                    heart.remove();
+                }, 4100); // Remove after animation completes
+            }
+        }
+    </script>
 </body>
 </html>
