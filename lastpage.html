@@ -14,15 +14,14 @@
             padding: 20px;
             box-sizing: border-box;
             line-height: 1.6;
-            overflow-y: auto; /* Enable vertical scrolling */
-            min-height: 100vh; /* Ensure the body takes up at least full viewport height */
+            min-height: 100vh;
+            overflow-y: auto;
         }
         h1 {
             text-align: center;
             color: #5b3d00;
             font-size: 2.5rem;
             margin-bottom: 20px;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
         }
         .content {
             text-align: center;
@@ -42,55 +41,26 @@
             color: #c49a3d;
             margin-top: 30px;
             font-weight: bold;
-            text-decoration: none; /* Removed underline */
         }
         .button-container {
             display: flex;
             justify-content: center;
-            gap: 20px; /* Space between buttons */
+            gap: 20px;
             margin-top: 40px;
         }
-        button { 
+        button {
             color: red;
             background-color: white;
             border: 2px solid red;
             cursor: pointer;
             padding: 10px;
             transition-duration: .5s;
-            font-size: 1.5rem; /* Increased font size */
+            font-size: 1.5rem;
         }
         button:hover {
             color: white;
             background-color: red;
             transform: scale(1.1);
-        }
-        .heart {
-            width: 60px;
-            height: 60px;
-            background-color: red;
-            position: relative;
-            display: inline-block;
-            margin-top: 20px;
-            border-radius: 50px 50px 0 0; /* Top corners rounded */
-            transform: rotate(-45deg);
-            transition: transform 0.5s;
-        }
-        .heart::before,
-        .heart::after {
-            content: "";
-            width: 60px;
-            height: 60px;
-            background-color: red;
-            border-radius: 50%;
-            position: absolute;
-        }
-        .heart::before {
-            top: -30px;
-            left: 0;
-        }
-        .heart::after {
-            left: 30px;
-            top: 0;
         }
         footer {
             text-align: center;
@@ -130,10 +100,6 @@
             <button id="yes-button">Yes</button>
         </div>
 
-        <div class="heart-container" style="display: none;">
-            <div class="heart"></div>
-        </div>
-
         <div class="gif-container">
             <div class="tenor-gif-embed" data-postid="7355347396987361923" data-share-method="host" data-aspect-ratio="1.23333" data-width="100%">
                 <a href="https://tenor.com/view/mocha-bear-hearts-mocha-and-milk-bears-milk-mocha-bear-gif-love-gif-7355347396987361923">Mocha Bear Hearts Sticker</a>
@@ -149,10 +115,8 @@
 
     <script>
         document.getElementById('yes-button').addEventListener('click', function() {
-            // Hide the button and show the heart
-            this.style.display = 'none';
-            const heartContainer = document.querySelector('.heart-container');
-            heartContainer.style.display = 'block';
+            // Change the text of the button to a heart emoji
+            this.textContent = '❤️';
         });
     </script>
 </body>
