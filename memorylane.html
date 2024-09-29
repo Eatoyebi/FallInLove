@@ -18,6 +18,8 @@
         h1 {
             text-align: center;
             color: #5b3d00;
+            font-size: 2.5rem; /* Increased font size for the title */
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Subtle text shadow */
         }
         .memory-container {
             display: grid;
@@ -25,6 +27,10 @@
             gap: 20px; /* Space between grid items */
             max-height: 80vh; /* Set a maximum height for the grid */
             overflow-y: auto; /* Enable vertical scrolling if content exceeds max height */
+            padding: 20px; /* Padding around the memory container */
+            background-color: rgba(255, 255, 255, 0.9); /* Slightly opaque background for the container */
+            border-radius: 10px; /* Rounded corners for the container */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
         }
         .memory {
             border: 1px solid #c49a3d;
@@ -32,36 +38,44 @@
             padding: 15px;
             background-color: #fdf2e9;
             text-align: center;
+            transition: transform 0.3s; /* Transition for hover effect */
+        }
+        .memory:hover {
+            transform: scale(1.05); /* Scale effect on hover */
         }
         img {
             max-width: 100%; /* Responsive image size */
             height: auto;
             border-radius: 8px;
             margin-bottom: 10px;
+            border: 2px solid #c49a3d; /* Border for images */
         }
         h2 {
             margin: 10px 0;
-            font-size: 1.2rem; /* Adjusted font size for headers */
+            font-size: 1.5rem; /* Adjusted font size for headers */
             color: #5b3d00;
+            font-weight: bold; /* Bold header for emphasis */
         }
         p {
             font-size: 1rem; /* Adjusted font size for paragraphs */
+            line-height: 1.6; /* Improved line spacing for readability */
         }
         .next-button {
             display: block;
-            width: 150px; /* Fixed width for the button */
-            margin: 20px auto; /* Center the button */
-            padding: 10px;
+            width: 160px; /* Fixed width for the button */
+            margin: 30px auto; /* Center the button */
+            padding: 12px;
             background-color: #c49a3d; /* Button color */
             color: white; /* Button text color */
             text-align: center;
             text-decoration: none; /* Remove underline */
             border-radius: 5px; /* Rounded corners */
-            font-size: 1.1rem; /* Button text size */
-            transition: background-color 0.3s; /* Transition effect */
+            font-size: 1.2rem; /* Button text size */
+            transition: background-color 0.3s, transform 0.3s; /* Transition effects */
         }
         .next-button:hover {
             background-color: #a67a2f; /* Darker shade on hover */
+            transform: scale(1.05); /* Scale effect on hover */
         }
     </style>
 </head>
